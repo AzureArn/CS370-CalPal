@@ -1,3 +1,5 @@
-"# CS370-CalPal" 
-
-Testing an addition to the repository..
+CS-370 Group Six
+Aneesa Arredondo
+Adam Barry
+Maxwell Bowman
+Ryan Milner
