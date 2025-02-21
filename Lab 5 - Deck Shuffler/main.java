@@ -22,18 +22,18 @@ public class main {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
 
-            int startX = 40;
+            int startX = 40; // table origin point
             int startY = 20;
 
-            g2d.setColor(new Color(29, 92, 29));
-            g2d.fillRect(startX, startY,width - 80,height - 100);
+            g2d.setColor(new Color(29, 92, 29)); // Color set
+            g2d.fillRect(startX, startY,width - 80,height - 100); // Table dimensions
 
         }
     }
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame();  // creates frame object
         CardPanel panel = new CardPanel();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // makes the program exit the JVM on close
