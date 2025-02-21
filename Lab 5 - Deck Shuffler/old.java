@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 
 
-public class main {
+public class old {
 
     static int width = 1360;
     static int height = 768;
@@ -32,7 +32,7 @@ public class main {
     }
 
 
-    public static void main(String[] args) {
+    public static void old(String[] args) {
         JFrame frame = new JFrame();
         CardPanel panel = new CardPanel();
 
