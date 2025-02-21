@@ -1,14 +1,11 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.util.Random;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Collections;
-import java.util.Collection;
 import javax.swing.ImageIcon;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 
