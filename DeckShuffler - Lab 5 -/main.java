@@ -7,9 +7,7 @@ import javax.swing.ImageIcon;
 import java.io.File;
 import java.util.ArrayList;
 
-
-
-public class Main {
+public class main {
 
     public static class CardPanel extends JPanel{
         private ArrayList<ImageIcon> cardImages = new ArrayList<>();
