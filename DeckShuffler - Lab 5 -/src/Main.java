@@ -104,7 +104,6 @@ public class Main {
 
             g2d.setColor(new Color(29, 92, 29));
             g2d.fillRect(startX, startY, width, height);
-            g2d.draw(new Rectangle2D.Double(startX, startY, width, height));
 
         }
     }
@@ -132,10 +131,10 @@ public class Main {
             }
         });
 
-        int locX = (sizeX / 2);
-        int locY = (sizeY - 100);
+        int locX = (sizeX / 3) + (sizeX / 9);
+        int locY = (sizeY - 150);
         redrawButton.setLocation(locX, locY);
-        redrawButton.setSize(150, 50);
+        redrawButton.setSize(150, 75);
         frame.getContentPane().add(panel);
         panel.add(redrawButton);
 
