@@ -1,3 +1,11 @@
 2/18/25 Meeting 1
 - Created a github repository
 - Connected repository to accounts
+
+2/25/25 Meeting 2
+- Discussed what we had learned from running code through multiple IDEs and OS's (Mac and Windows)
+- Determined what people will be working on and divvying the work
+- Determined what we want by our first meet (March) with our professor:
+  - We want our databases implemented and data I/O implemented as well
+  - Soft goal of having these implemented with GUI
+- We discovered a new risk where we are programming on two different OS' (Windows and Mac) and in the future we will consider this when writing our program(s).
