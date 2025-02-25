@@ -34,8 +34,8 @@ public class Main {
             // search for the right directory using walk
             String cardsDir = "";
             try {
-                Stream<Path> paths = Files.walk(Paths.get(System.getProperty("user.dir") + "\\"));
-                paths = paths.filter(str -> str.toString().endsWith("\\cards"));
+                Stream<Path> paths = Files.walk(Paths.get(System.getProperty("user.dir")));
+                paths = paths.filter(str -> str.toString().endsWith("cards"));
                 Optional<Path> p = paths.findAny();
                 if (p.isPresent()) {
                     cardsDir = p.get().toString();
