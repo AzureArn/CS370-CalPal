@@ -9,3 +9,9 @@
   - We want our databases implemented and data I/O implemented as well
   - Soft goal of having these implemented with GUI
 - We discovered a new risk where we are programming on two different OS' (Windows and Mac) and in the future we will consider this when writing our program(s).
+
+3/4/25 Meeting 3
+- Discussed the actual usage of the API
+  - Discussed the specifics of how the food database would be used: querying for food to find a specific item and potentially allowing a viewable, scrollable list.
+  - Discussed the possibility of not using the API if it is too cumbersome, and would instead create a mock food database
+- Worked on Lab 7 together
