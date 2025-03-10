@@ -35,7 +35,7 @@ public class Main {
             String cardsDir = "";
             try {
                 Stream<Path> paths = Files.walk(Paths.get(System.getProperty("user.dir")));
-                paths = paths.filter(str -> str.toString().endsWith("cards"));
+                paths = paths.filter(str -> str.toString().endsWith("DeckShuffler - Lab 5 -/cards"));
                 Optional<Path> p = paths.findAny();
                 if (p.isPresent()) {
                     cardsDir = p.get().toString();
