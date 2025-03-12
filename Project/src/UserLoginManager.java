@@ -105,7 +105,7 @@ public class UserLoginManager {
 
         // loop through each user, return false if the name already exists
         for(User u : users){
-            if(u.name.equals(name)){
+            if(u.name.toLowerCase().equals(name.toLowerCase())){
                 return false;
             }
         }
@@ -132,7 +132,7 @@ public class UserLoginManager {
         password = password.strip();
         // search through each user for a match, return false if one isn't found
         for(User u : users){
-            if(u.name.equals(name) && u.password.equals(password)){
+            if(u.name.toLowerCase().equals(name.toLowerCase()) && u.password.equals(password)){
                 return true;
             }
         }
