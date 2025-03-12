@@ -15,3 +15,8 @@
   - Discussed the specifics of how the food database would be used: querying for food to find a specific item and potentially allowing a viewable, scrollable list.
   - Discussed the possibility of not using the API if it is too cumbersome, and would instead create a mock food database
 - Worked on Lab 7 together
+
+3/11/25 Meeting 4
+- Discuss and tested prototype of login code
+    - edited it for username to not be Caps sensitive
+    - Code is only in terminal ATM, development of UI is needed
