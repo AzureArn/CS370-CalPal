@@ -20,3 +20,9 @@
 - Discuss and tested prototype of login code
     - edited it for username to not be Caps sensitive
     - Code is only in terminal ATM, development of UI is needed
+
+3/18/25 Meeting 5
+- With the lecture today, we discussed how our login code somewhat resembles MVC where we have a built-in controller with the login code
+  - Considering splitting up the login code between a primary controller
+- Discussed how we might move forward and how we have some difficulty with how little actual written/designed code we have at the moment
+- Worked on lab 9
