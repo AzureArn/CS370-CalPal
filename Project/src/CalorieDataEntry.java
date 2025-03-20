@@ -20,7 +20,7 @@ public class CalorieDataEntry {
         entryDate = LocalDate.now(); // get current day
         setCaloriesConsumed(consumed);
         setCaloriesBurned(burned);
-        netCalories = caloriesConsumed - caloriesBurned;
+        // net calories set by setters
     }
 
     // setter for caloriesBurned, returns false if negative value and sets to 0, also sets net value
