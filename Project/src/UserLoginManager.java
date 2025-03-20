@@ -14,11 +14,11 @@ public class UserLoginManager {
        to check if entered username and password combination exists
     */
 
-    private class User{
+    private class UserCredentials{
         public String name;
         public String password;
 
-        public User(String n, String p){
+        public UserCredentials(String n, String p){
             name = n;
             password = p;
         }
@@ -26,7 +26,7 @@ public class UserLoginManager {
 
     // get users from file and place them here so that the file only needs
     // to be traversed once
-    private static ArrayList<User> users;
+    private static ArrayList<UserCredentials> users;
 
     // only called by other functions to find the folder or file
     // returns the File object containing the folder or a File object with an empty string
@@ -73,7 +73,7 @@ public class UserLoginManager {
 
     // constructor will add users to the array list, create file if it doesn't exist
     public UserLoginManager(){
-        users = new ArrayList<User>();
+        users = new ArrayList<UserCredentials>();
         if(!UserLoginManager.createUserFile()){ // if a file wasn't created, check the file
             try{
                 // finds the file in the Project folder
@@ -83,7 +83,7 @@ public class UserLoginManager {
                     String line = reader.nextLine();
                     String name = line.substring(0, line.indexOf("::"));
                     String password = line.substring(line.indexOf("::") + 2);
-                    users.add(new User(name, password));
+                    users.add(new UserCredentials(name, password));
                 }
                 reader.close();
 
@@ -104,7 +104,7 @@ public class UserLoginManager {
         }
 
         // loop through each user, return false if the name already exists
-        for(User u : users){
+        for(UserCredentials u : users){
             if(u.name.toLowerCase().equals(name.toLowerCase())){
                 return false;
             }
@@ -121,7 +121,7 @@ public class UserLoginManager {
         }
 
         // place this new user into the array
-        users.add(new User(name, password));
+        users.add(new UserCredentials(name, password));
 
         return true;
     }
@@ -131,7 +131,7 @@ public class UserLoginManager {
         name = name.strip();
         password = password.strip();
         // search through each user for a match, return false if one isn't found
-        for(User u : users){
+        for(UserCredentials u : users){
             if(u.name.toLowerCase().equals(name.toLowerCase()) && u.password.equals(password)){
                 return true;
             }
@@ -140,7 +140,7 @@ public class UserLoginManager {
     }
 
     public void printUsers(){
-        for(User u : users){
+        for(UserCredentials u : users){
             System.out.println(u.name);
         }
     }
