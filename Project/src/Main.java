@@ -33,14 +33,7 @@ public class Main {
                 System.out.print("Password: ");
                 password = keyboard.nextLine();
 
-                if(ulm.loginSuccess(name, password)){
-                    System.out.println("Successfully logged in");
-                    exit = true;
-                }
-                else{
-                    System.out.println("Could not log in\n");
-                }
-
+                ulm.login(name, password);
             }
             else if(menuOption == 2){
                 String name;
@@ -51,12 +44,7 @@ public class Main {
                 System.out.print("Enter a password: ");
                 password = keyboard.nextLine();
 
-                if(ulm.addUser(name, password)){
-                    System.out.println("Added user: " + name + "\n");
-                }
-                else{
-                    System.out.println("Could not add user, make sure the name is unique\n");
-                }
+                ulm.addUser(name, password);
             }
             else if(menuOption == 3){
                 ulm.printUsers();
