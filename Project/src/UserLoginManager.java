@@ -30,14 +30,16 @@ public class UserLoginManager {
     }
 
     // attempt to login
-    public void login(String name, String password){
+    public boolean login(String name, String password){
         name = name.strip();
         password = password.strip();
         if(users.loginSuccess(name, password)){
             System.out.println("Logged in successfully");
+            return true;
         }
         else{
             System.out.println("Could not log in, user name or password invalid");
+            return false;
         }
     }
 

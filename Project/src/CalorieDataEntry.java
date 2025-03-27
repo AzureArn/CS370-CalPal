@@ -16,8 +16,8 @@ public class CalorieDataEntry {
     }
 
     // argument constructor, arguments should not be negative
-    public CalorieDataEntry(int consumed, int burned){
-        entryDate = LocalDate.now(); // get current day
+    public CalorieDataEntry(int consumed, int burned, LocalDate date){
+        entryDate = date;
         setCaloriesConsumed(consumed);
         setCaloriesBurned(burned);
         // net calories set by setters
@@ -55,5 +55,14 @@ public class CalorieDataEntry {
     // getter for caloriesConsumed
     public int getCaloriesConsumed() {
         return caloriesConsumed;
+    }
+
+    // getter for netCalories
+    public int getNetCalories(){
+        return netCalories;
+    }
+
+    public LocalDate getEntryDate(){
+        return entryDate;
     }
 }
