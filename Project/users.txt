@@ -1,6 +1,3 @@
-\n::a
-\ \\ 1a::b
-/n \n::a
-\n \n \n a::l
 abc::123
 abcd::1234
+test::123
