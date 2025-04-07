@@ -1,11 +1,4 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.stream.Stream;
 
 // collection of user credentials gained from the text file for easier checking
 public class UserCredentialsCollection {
@@ -69,7 +62,7 @@ public class UserCredentialsCollection {
     }
 
     // return true if the user exists, false otherwise
-    public boolean loginSuccess(String name, String password){
+    public boolean userExists(String name, String password){
         name = name.strip();
         password = password.strip();
         // search through each user for a match, return false if one isn't found

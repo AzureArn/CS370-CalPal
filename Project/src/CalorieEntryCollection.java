@@ -1,14 +1,5 @@
-import org.w3c.dom.Text;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class CalorieEntryCollection {
     private String userName; // the user that this collection belongs to
