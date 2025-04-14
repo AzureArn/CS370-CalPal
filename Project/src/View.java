@@ -22,7 +22,15 @@ public class View {
     private JLabel loginMessageLabel;
 
     // main view components
-    private JLabel testLabel;
+    private JLabel userNameDisplayLabel;
+    private JLabel selectDayLabel;
+    private JComboBox dateDropdown;
+    private JLabel dateLabel;
+    private JLabel caloriesConsumedLabel;
+    private JLabel caloriesBurnedLabel;
+
+    private JTabbedPane dataEntryPane;
+
 
     public View(){
         // TODO: give the view a proper layout later
@@ -40,12 +48,12 @@ public class View {
 
         // ***LOGIN VIEW SECTION***
         // username input components
-        userLabel = new JLabel("Enter User Name:");
+        userLabel = new JLabel("User Name:");
         userField = new JTextField();
         userField.setPreferredSize(new Dimension(100,25));
 
         // password input components
-        passwordLabel = new JLabel("Enter Password:");
+        passwordLabel = new JLabel("Password:");
         passwordField = new JTextField();
         passwordField.setPreferredSize(new Dimension(100,25));
 
@@ -74,8 +82,25 @@ public class View {
         frame.getContentPane().add(loginPanel);
 
         //***MAIN VIEW SECTION***
-        testLabel = new JLabel();
-        mainPanel.add(testLabel);
+        userNameDisplayLabel = new JLabel();
+
+        JLabel selectDayLabel = new JLabel("Select Day:");
+        JComboBox dateDropdown = new JComboBox();
+        JLabel dateLabel = new JLabel("dateplaceholder");
+        JLabel caloriesConsumedLabel = new JLabel("consumedplaceholder");
+        JLabel caloriesBurnedLabel = new JLabel("burnedplaceholder");
+
+        JTabbedPane dataEntryPane = new JTabbedPane();
+
+
+        mainPanel.add(userNameDisplayLabel);
+        mainPanel.add(selectDayLabel);
+        mainPanel.add(dateDropdown);
+        mainPanel.add(dateLabel);
+        mainPanel.add(caloriesConsumedLabel);
+        mainPanel.add(caloriesBurnedLabel);
+
+        mainPanel.add(dataEntryPane);
 
         frame.setVisible(true);
     }
@@ -125,7 +150,7 @@ public class View {
         return mainPanel;
     }
 
-    public JLabel getTestLabel() {
-        return testLabel;
+    public JLabel getUserNameDisplayLabel() {
+        return userNameDisplayLabel;
     }
 }

@@ -38,7 +38,7 @@ public class UIController {
 
     // createUserButton's function
     // adds a new user
-    public void addUser(){
+    private void addUser(){
         // get the name and password from the field
         String name = view.getUserField().getText();
         String password = view.getPasswordField().getText();
@@ -59,7 +59,7 @@ public class UIController {
 
     // loginButton's function
     // attempts to log user in, switches screen if successful
-    public void logIn(){
+    private void logIn(){
         // get the name and password from the field
         String name = view.getUserField().getText();
         String password = view.getPasswordField().getText();
@@ -72,7 +72,7 @@ public class UIController {
             view.swapView();
             //instantiate dataManager using the username
             userDataManager = new UserDataManager(name.strip());
-            view.getTestLabel().setText("User " + name.strip() + " logged in");
+            view.getUserNameDisplayLabel().setText("User: " + name.strip());
         }
         else{
             // use the message label to tell the user login was not successful
