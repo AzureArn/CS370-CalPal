@@ -47,7 +47,58 @@ public class View {
 
 
         // ***LOGIN VIEW SECTION***
-        // username input components
+        // Setup defaults
+        loginPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        //Username Label
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        loginPanel.add(new JLabel("Username:"),gbc);
+        //Username Field
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        userField = new JTextField(15);
+        loginPanel.add(userField,gbc);
+
+        //Password Label
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        loginPanel.add(new JLabel("Password:"),gbc);
+        //Password Field
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        passwordField = new JPasswordField(15);
+        loginPanel.add(passwordField,gbc);
+
+        //Buttons
+        //New User button
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        createUserButton = new JButton("Create User");
+        createUserButton.setFocusable(false);
+        loginPanel.add(createUserButton, gbc);
+        // Login button
+        gbc.gridx = 3;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        loginButton = new JButton("Login");
+        loginButton.setFocusable(false);
+        loginPanel.add(loginButton, gbc);
+
+        // Error label
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 4; // Span across columns if needed
+        loginMessageLabel = new JLabel("");
+        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        loginMessageLabel.setForeground(Color.RED); // error color
+        loginPanel.add(loginMessageLabel, gbc);
+
+        /* username input components
         userLabel = new JLabel("User Name:");
         userField = new JTextField();
         userField.setPreferredSize(new Dimension(100,25));
@@ -77,6 +128,7 @@ public class View {
         loginPanel.add(loginButton);
         loginPanel.add(createUserButton);
         loginPanel.add(loginMessageLabel);
+        */
 
         // only add the loginPanel the frame to start
         frame.getContentPane().add(loginPanel);
@@ -109,8 +161,9 @@ public class View {
     public void swapView(){
         // remove first panel, add the second, then revalidate to change view to main screen
         frame.getContentPane().remove(loginPanel);
-        frame.getContentPane().add(mainPanel);
+        frame.setContentPane(mainPanel);
         frame.revalidate();
+        frame.repaint();
     }
 
     // Getters for various components

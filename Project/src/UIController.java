@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 // the controller that makes use of the UserDataManager and UserLoginManager
 public class UIController {
     // view is the UI view that the controller interacts with
@@ -48,12 +49,12 @@ public class UIController {
 
         if(success){
             // use the message label to tell the user it was successful
-            view.getLoginMessageLabel().setText("User " + name.strip() + " added");
+            view.getLoginMessageLabel().setText("User " + name.strip() + " created");
         }
         else{
             // use the message label to tell the user it was not successful
             view.getLoginMessageLabel().setText("Could not add user," +
-                    " name is either taken or name/password includes : character");
+                    " name is either taken or name/password includes ':' character");
         }
     }
 
