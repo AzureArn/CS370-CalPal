@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 // class responsible for creating/adjusting text files
 public class TextFileHandler {
+    private static final String textFolder = "DataFiles";
 
     // finds the folder or file with the given name
     // returns the File object containing the folder or a File object with an empty string
@@ -35,7 +36,7 @@ public class TextFileHandler {
     // return true if file created, false if not
     // name argument is the name of the file to create
     public static boolean createTextFile(String fileName){
-        File folder = getFile("Project");
+        File folder = getFile(textFolder);
         if(folder.getName().isEmpty()){ // if the folder could not be found
             System.out.println("Couldn't find the parent folder");
             System.exit(2);
@@ -56,7 +57,7 @@ public class TextFileHandler {
     // append the given text to the given file
     public static void appendTextFile(String fileName, String text){
         try{
-            BufferedWriter bWriter = new BufferedWriter(new FileWriter(new File(getFile("Project"), fileName + ".txt"),true));
+            BufferedWriter bWriter = new BufferedWriter(new FileWriter(new File(getFile(textFolder), fileName + ".txt"),true));
             bWriter.write(text);
             bWriter.close();
         } catch (IOException ioe){
@@ -68,8 +69,8 @@ public class TextFileHandler {
     // replaces the last line of a text file
     public static void changeLastLine(String fileName, String text){
         // create new file to write into and later rename it to match the old file's name
-        File newFile = new File(getFile("Project"), "new.txt");
-        File oldFile = new File(getFile("Project"), fileName + ".txt");
+        File newFile = new File(getFile(textFolder), "new.txt");
+        File oldFile = new File(getFile(textFolder), fileName + ".txt");
         try{
             // writer into the new file
             BufferedWriter bWriter = new BufferedWriter(new FileWriter(newFile,false));
