@@ -9,6 +9,7 @@ public class UIController {
     // the loginManager and dataManager interact with the user credential data and calorie data respectively
     UserLoginManager loginManager;
     UserDataManager userDataManager;
+    DatabaseDataManager databaseManager;
 
     public UIController(View view){
         this.view = view;
