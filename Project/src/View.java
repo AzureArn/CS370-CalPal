@@ -142,9 +142,31 @@ public class View {
         JLabel caloriesConsumedLabel = new JLabel("consumedplaceholder");
         JLabel caloriesBurnedLabel = new JLabel("burnedplaceholder");
 
+        // Data entry section in the main view
         JTabbedPane dataEntryPane = new JTabbedPane();
+        // food panel
+        JPanel foodPanel = new JPanel();
+        String[] testFood = {"Apple", "Pear"};
+        JComboBox foodDropdown = new JComboBox(testFood);
+        foodDropdown.setEditable(true);
+        foodDropdown.add(new PopupMenu("test1"));
+        foodPanel.add(new JLabel("food placeholder"));
+        foodPanel.add(foodDropdown);
 
+        // exercise panel
+        JPanel exercisePanel = new JPanel();
+        String[] testExercise = {"a", "b"};
+        JComboBox exerciseDropdown = new JComboBox(testExercise);
+        exercisePanel.add(new JLabel("exercise placeholder"));
+        exercisePanel.add(exerciseDropdown);
 
+        // add the panels to the tabbed pane
+        dataEntryPane.addTab("Food", null, foodPanel, "Use this tab to search food data and" +
+                " to input the amount of food eaten");
+        dataEntryPane.addTab("Exercise", null, exercisePanel, "Use this tab to search exercise data, " +
+                "to input the amount of exercise performed, and to view exercise diagrams");
+
+        // add components to the main panel
         mainPanel.add(userNameDisplayLabel);
         mainPanel.add(selectDayLabel);
         mainPanel.add(dateDropdown);
