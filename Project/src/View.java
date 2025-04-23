@@ -247,4 +247,16 @@ public class View {
     public JComboBox getDateDropdown() {
         return dateDropdown;
     }
+
+    public JLabel getDateLabel(){
+        return dateLabel;
+    }
+
+    public JLabel getCaloriesBurnedLabel() {
+        return caloriesBurnedLabel;
+    }
+
+    public JLabel getCaloriesConsumedLabel() {
+        return caloriesConsumedLabel;
+    }
 }

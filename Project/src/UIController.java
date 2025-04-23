@@ -39,18 +39,17 @@ public class UIController {
 
         //***MAIN VIEW***
         // dateDropdown
-        //
         view.getDateDropdown().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                selectDate();
             }
         });
     }
 
     // create methods for each button / other component that sends action here
 
-    // createUserButton's function
+    // createUserButton's behavior
     // adds a new user
     private void addUser(){
         // get the name and password from the field
@@ -71,7 +70,7 @@ public class UIController {
         }
     }
 
-    // loginButton's function
+    // loginButton's behavior
     // attempts to log user in, switches screen if successful
     private void logIn(){
         // get the name and password from the field
@@ -86,8 +85,6 @@ public class UIController {
             userDataManager = new UserDataManager(name.strip());
             view.getUserNameDisplayLabel().setText("User: " + name.strip());
 
-            // TODO: Insert entries in the form of the date strings into the combobox
-            // TODO: Not getting recent dates, issue in TextFileHandler?
             // insert the user's data entry dates into the dateDropdown component
             ArrayList<String> dates = userDataManager.getAllDates();
             if(dates.isEmpty()){
@@ -98,6 +95,9 @@ public class UIController {
                     (date) -> view.getDateDropdown().addItem(date)
             );
 
+            // select last item in dateDropdown component by default, most recent date
+            view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
+
             // swap the view
             view.swapView();
         }
@@ -105,5 +105,20 @@ public class UIController {
             // use the message label to tell the user login was not successful
             view.getLoginMessageLabel().setText("Could not log in");
         }
+    }
+
+    // dateDropdown's behavior
+    // update the date label, calories consumed label, and calories burned label to match the entry's data
+    private void selectDate(){
+        String date = (String) view.getDateDropdown().getSelectedItem();
+        CalorieDataEntry entry = userDataManager.getEntry(date);
+        // check if entry could not be found, should not occur in normal operation
+        if(entry == null){
+            System.out.println("Something went wrong");
+            System.exit(10);
+        }
+        view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
+        view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
+        view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
     }
 }
