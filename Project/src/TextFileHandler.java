@@ -34,7 +34,7 @@ public class TextFileHandler {
 
     // creates text file if it doesn't exist,
     // return true if file created, false if not
-    // name argument is the name of the file to create
+    // fileName argument is the name of the file to create
     public static boolean createTextFile(String fileName){
         File folder = getFile(textFolder);
         if(folder.getName().isEmpty()){ // if the folder could not be found

@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 // the controller that makes use of the UserDataManager and UserLoginManager
@@ -19,6 +20,7 @@ public class UIController {
 
         // set various action listeners for components
 
+        // ***LOGIN VIEW***
         // createUserButton
         view.getCreateUserButton().addActionListener(new ActionListener() {
             @Override
@@ -32,6 +34,16 @@ public class UIController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 logIn();
+            }
+        });
+
+        //***MAIN VIEW***
+        // dateDropdown
+        //
+        view.getDateDropdown().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
@@ -70,11 +82,24 @@ public class UIController {
         boolean success = loginManager.logIn(name, password);
 
         if(success){
-            // swap the view
-            view.swapView();
             //instantiate dataManager using the username
             userDataManager = new UserDataManager(name.strip());
             view.getUserNameDisplayLabel().setText("User: " + name.strip());
+
+            // TODO: Insert entries in the form of the date strings into the combobox
+            // TODO: Not getting recent dates, issue in TextFileHandler?
+            // insert the user's data entry dates into the dateDropdown component
+            ArrayList<String> dates = userDataManager.getAllDates();
+            if(dates.isEmpty()){
+                System.out.println("Could not get dates for entry collection");
+                return;
+            }
+            dates.forEach(
+                    (date) -> view.getDateDropdown().addItem(date)
+            );
+
+            // swap the view
+            view.swapView();
         }
         else{
             // use the message label to tell the user login was not successful

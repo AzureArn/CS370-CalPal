@@ -28,6 +28,11 @@ public class CalorieEntryCollection {
                 int calBurned = Integer.parseInt(line.substring(line.indexOf("||") + 2));
                 entries.add(new CalorieDataEntry(calConsumed, calBurned, LocalDate.parse(date)));
             }
+
+            // if there isn't an entry for the current day, create one
+            if(! entries.getLast().getEntryDate().equals(LocalDate.now())){
+                entries.add(new CalorieDataEntry());
+            }
         }
         else{
             // if file didn't exist, add an entry for the current day
@@ -68,6 +73,15 @@ public class CalorieEntryCollection {
         // rewrite file
         String line = entry.getEntryDate().toString() + "::" + entry.getCaloriesConsumed() + "||" + entry.getCaloriesBurned() + "\n";
         TextFileHandler.changeLastLine("user-" + this.userName, line);
+    }
+
+    // return the dates of all entries as an arraylist of strings
+    public ArrayList<String> getAllDates(){
+        ArrayList<String> dates = new ArrayList<>();
+        entries.forEach(
+                (entry) -> dates.add(entry.getEntryDate().toString())
+        );
+        return dates;
     }
 
     public String getUserName() {

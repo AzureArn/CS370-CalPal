@@ -3,11 +3,12 @@ import java.awt.*;
 
 // view class, creates components to be interacted with by UIController
 public class View {
-    private JFrame frame = new JFrame("Cal Pal");
+    // the frame that contains every component
+    private JFrame frame;
     // the login view
-    private JPanel loginPanel = new JPanel();
+    private JPanel loginPanel;
     // the main view
-    private JPanel mainPanel = new JPanel();
+    private JPanel mainPanel;
 
     // login view components
     private JLabel userLabel;
@@ -24,18 +25,32 @@ public class View {
     // main view components
     private JLabel userNameDisplayLabel;
     private JLabel selectDayLabel;
-    private JComboBox dateDropdown;
+    private JComboBox<String> dateDropdown;
     private JLabel dateLabel;
     private JLabel caloriesConsumedLabel;
     private JLabel caloriesBurnedLabel;
 
+    //  main view's tabbed pane components
     private JTabbedPane dataEntryPane;
+
+    private JPanel foodPanel;
+    private JComboBox foodDropdown;
+
+    private JPanel exercisePanel;
+    private JComboBox exerciseDropdown;
+
 
 
     public View(){
         // TODO: give the view a proper layout later
         // loginPanel.setLayout(new GridBagLayout());
         // mainPanel.setLayout(new GridBagLayout());
+        frame = new JFrame("Cal Pal");
+
+        // the login view
+        loginPanel = new JPanel();
+        // the main view
+        mainPanel = new JPanel();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // makes the program exit the JVM on close
 
@@ -136,27 +151,27 @@ public class View {
         //***MAIN VIEW SECTION***
         userNameDisplayLabel = new JLabel();
 
-        JLabel selectDayLabel = new JLabel("Select Day:");
-        JComboBox dateDropdown = new JComboBox();
-        JLabel dateLabel = new JLabel("dateplaceholder");
-        JLabel caloriesConsumedLabel = new JLabel("consumedplaceholder");
-        JLabel caloriesBurnedLabel = new JLabel("burnedplaceholder");
+        selectDayLabel = new JLabel("Select Day:");
+        dateDropdown = new JComboBox<String>();
+        dateLabel = new JLabel("dateplaceholder");
+        caloriesConsumedLabel = new JLabel("consumedplaceholder");
+        caloriesBurnedLabel = new JLabel("burnedplaceholder");
 
         // Data entry section in the main view
-        JTabbedPane dataEntryPane = new JTabbedPane();
+        dataEntryPane = new JTabbedPane();
         // food panel
-        JPanel foodPanel = new JPanel();
+        foodPanel = new JPanel();
         String[] testFood = {"Apple", "Pear"};
-        JComboBox foodDropdown = new JComboBox(testFood);
+        foodDropdown = new JComboBox(testFood);
         foodDropdown.setEditable(true);
         foodDropdown.add(new PopupMenu("test1"));
         foodPanel.add(new JLabel("food placeholder"));
         foodPanel.add(foodDropdown);
 
         // exercise panel
-        JPanel exercisePanel = new JPanel();
+        exercisePanel = new JPanel();
         String[] testExercise = {"a", "b"};
-        JComboBox exerciseDropdown = new JComboBox(testExercise);
+        exerciseDropdown = new JComboBox(testExercise);
         exercisePanel.add(new JLabel("exercise placeholder"));
         exercisePanel.add(exerciseDropdown);
 
@@ -227,5 +242,9 @@ public class View {
 
     public JLabel getUserNameDisplayLabel() {
         return userNameDisplayLabel;
+    }
+
+    public JComboBox getDateDropdown() {
+        return dateDropdown;
     }
 }

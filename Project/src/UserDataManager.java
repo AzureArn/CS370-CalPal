@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class UserDataManager {
     private CalorieEntryCollection dataEntries;
@@ -7,18 +8,18 @@ public class UserDataManager {
         dataEntries = new CalorieEntryCollection(userName);
     }
 
-    public void viewEntry(LocalDate date){
-        CalorieDataEntry entry = dataEntries.findEntry(date);
-        if(entry == null){
-            System.out.println("Entry could not be found");
-            return;
-        }
-        System.out.println("Date: " + entry.getEntryDate().toString());
-        System.out.println("Calories Consumed: " + entry.getCaloriesConsumed());
-        System.out.println("Calories Burned: " + entry.getCaloriesBurned());
-        System.out.println("Net calories gained: " + entry.getNetCalories());
+    // gets the entry from the collection based on its date
+    public CalorieDataEntry getEntry(String date){
+        return dataEntries.findEntry(LocalDate.parse(date));
     }
 
+    // return the dates of all entries as an arraylist of strings
+    public ArrayList<String> getAllDates(){
+        ArrayList<String> dates = dataEntries.getAllDates();
+        return dates;
+    }
+
+    // saves the calorie data for the current day
     public void saveCalorieData(int caloriesConsumed, int caloriesBurned){
         dataEntries.adjustCurrentEntry(caloriesConsumed, caloriesBurned);
     }
