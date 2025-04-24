@@ -31,7 +31,7 @@ public class CalorieEntryCollection {
 
             // if there isn't an entry for the current day, create one
             if(! entries.getLast().getEntryDate().equals(LocalDate.now())){
-                entries.add(new CalorieDataEntry());
+                addEntry(new CalorieDataEntry());
             }
         }
         else{

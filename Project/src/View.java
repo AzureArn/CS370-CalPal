@@ -34,10 +34,21 @@ public class View {
     private JTabbedPane dataEntryPane;
 
     private JPanel foodPanel;
+    private JLabel selectFoodLabel;
     private JComboBox foodDropdown;
+    private JLabel foodInfoLabel;
+    private JLabel foodEatenLabel;
+    private JTextField foodEatenField;
+    private JButton foodEatenButton;
 
     private JPanel exercisePanel;
+    private JLabel selectExerciseLabel;
     private JComboBox exerciseDropdown;
+    private JLabel exerciseInfoLabel;
+    private JLabel exercisePerformedLabel;
+    private JTextField exercisePerformedField;
+    private JButton exercisePerformedButton;
+    private JButton exerciseDiagramButton;
 
 
 
@@ -159,21 +170,49 @@ public class View {
 
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
+
         // food panel
         foodPanel = new JPanel();
+
+        selectFoodLabel = new JLabel("Select/Search For Food Item:");
         String[] testFood = {"Apple", "Pear"};
         foodDropdown = new JComboBox(testFood);
         foodDropdown.setEditable(true);
-        foodDropdown.add(new PopupMenu("test1"));
-        foodPanel.add(new JLabel("food placeholder"));
+        foodInfoLabel = new JLabel("food info Placeholder");
+
+        foodEatenLabel = new JLabel("food eaten Placeholder");
+        foodEatenField = new JTextField(5);
+        foodEatenButton = new JButton("Enter");
+
+
+
+        foodPanel.add(selectFoodLabel);
         foodPanel.add(foodDropdown);
+        foodPanel.add(foodInfoLabel);
+        foodPanel.add(foodEatenLabel);
+        foodPanel.add(foodEatenField);
+        foodPanel.add(foodEatenButton);
 
         // exercise panel
         exercisePanel = new JPanel();
+        selectExerciseLabel = new JLabel("Select Exercise:");
         String[] testExercise = {"a", "b"};
         exerciseDropdown = new JComboBox(testExercise);
-        exercisePanel.add(new JLabel("exercise placeholder"));
+
+        exerciseInfoLabel = new JLabel("exercise info Placeholder");
+        exerciseDiagramButton = new JButton("View Diagram");
+
+        exercisePerformedLabel = new JLabel("exercise performed Placeholder");
+        exercisePerformedField = new JTextField(5);
+        exercisePerformedButton = new JButton("Enter");
+
+        exercisePanel.add(selectExerciseLabel);
         exercisePanel.add(exerciseDropdown);
+        exercisePanel.add(exerciseInfoLabel);
+        exercisePanel.add(exerciseDiagramButton);
+        exercisePanel.add(exercisePerformedLabel);
+        exercisePanel.add(exercisePerformedField);
+        exercisePanel.add(exercisePerformedButton);
 
         // add the panels to the tabbed pane
         dataEntryPane.addTab("Food", null, foodPanel, "Use this tab to search food data and" +

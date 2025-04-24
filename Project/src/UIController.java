@@ -21,6 +21,7 @@ public class UIController {
         // set various action listeners for components
 
         // ***LOGIN VIEW***
+
         // createUserButton
         view.getCreateUserButton().addActionListener(new ActionListener() {
             @Override
@@ -38,6 +39,7 @@ public class UIController {
         });
 
         //***MAIN VIEW***
+
         // dateDropdown
         view.getDateDropdown().addActionListener(new ActionListener() {
             @Override
@@ -48,6 +50,8 @@ public class UIController {
     }
 
     // create methods for each button / other component that sends action here
+
+    // ***LOGIN VIEW***
 
     // createUserButton's behavior
     // adds a new user
@@ -106,6 +110,8 @@ public class UIController {
             view.getLoginMessageLabel().setText("Could not log in");
         }
     }
+
+    // ***MAIN VIEW***
 
     // dateDropdown's behavior
     // update the date label, calories consumed label, and calories burned label to match the entry's data
