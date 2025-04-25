@@ -40,6 +40,9 @@ public class View {
     private JLabel foodEatenLabel;
     private JTextField foodEatenField;
     private JButton foodEatenButton;
+    private JLabel setCaloriesConsumedLabel;
+    private JTextField setCaloriesConsumedField;
+    private JButton setCaloriesConsumedButton;
 
     private JPanel exercisePanel;
     private JLabel selectExerciseLabel;
@@ -49,6 +52,9 @@ public class View {
     private JTextField exercisePerformedField;
     private JButton exercisePerformedButton;
     private JButton exerciseDiagramButton;
+    private JLabel setCaloriesBurnedLabel;
+    private JTextField setCaloriesBurnedField;
+    private JButton setCaloriesBurnedButton;
 
 
 
@@ -184,6 +190,9 @@ public class View {
         foodEatenField = new JTextField(5);
         foodEatenButton = new JButton("Enter");
 
+        setCaloriesConsumedLabel = new JLabel("Manually Set The Calories Consumed:");
+        setCaloriesConsumedField = new JTextField(5);
+        setCaloriesConsumedButton = new JButton("Set");
 
 
         foodPanel.add(selectFoodLabel);
@@ -192,6 +201,9 @@ public class View {
         foodPanel.add(foodEatenLabel);
         foodPanel.add(foodEatenField);
         foodPanel.add(foodEatenButton);
+        foodPanel.add(setCaloriesConsumedLabel);
+        foodPanel.add(setCaloriesConsumedField);
+        foodPanel.add(setCaloriesConsumedButton);
 
         // exercise panel
         exercisePanel = new JPanel();
@@ -206,6 +218,10 @@ public class View {
         exercisePerformedField = new JTextField(5);
         exercisePerformedButton = new JButton("Enter");
 
+        setCaloriesBurnedLabel = new JLabel("Manually Set The Calories Burned:");
+        setCaloriesBurnedField = new JTextField(5);
+        setCaloriesBurnedButton = new JButton("Set");
+
         exercisePanel.add(selectExerciseLabel);
         exercisePanel.add(exerciseDropdown);
         exercisePanel.add(exerciseInfoLabel);
@@ -213,6 +229,9 @@ public class View {
         exercisePanel.add(exercisePerformedLabel);
         exercisePanel.add(exercisePerformedField);
         exercisePanel.add(exercisePerformedButton);
+        exercisePanel.add(setCaloriesBurnedLabel);
+        exercisePanel.add(setCaloriesBurnedField);
+        exercisePanel.add(setCaloriesBurnedButton);
 
         // add the panels to the tabbed pane
         dataEntryPane.addTab("Food", null, foodPanel, "Use this tab to search food data and" +
