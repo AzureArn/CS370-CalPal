@@ -40,8 +40,8 @@ public class UserCredentialsCollection {
 
     // return true if it was valid, false otherwise
     public boolean addUser(String name, String password){
-        name = name.strip();
-        password = password.strip();
+        name = name.strip().toLowerCase();
+        password = password.strip().toLowerCase();
         // check if there is both a name and password, and they don't contain colons
         if(name.isEmpty() || password.isEmpty() || name.contains(":") || password.contains(":")) {
             return false;

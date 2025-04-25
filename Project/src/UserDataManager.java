@@ -5,7 +5,7 @@ public class UserDataManager {
     private CalorieEntryCollection dataEntries;
 
     public UserDataManager(String userName){
-        dataEntries = new CalorieEntryCollection(userName);
+        dataEntries = new CalorieEntryCollection(userName.strip().toLowerCase());
     }
 
     // gets the entry from the collection based on its date
