@@ -29,6 +29,12 @@ public class View {
     private JLabel dateLabel;
     private JLabel caloriesConsumedLabel;
     private JLabel caloriesBurnedLabel;
+    private JLabel setCaloriesConsumedLabel;
+    private JTextField setCaloriesConsumedField;
+    private JButton setCaloriesConsumedButton;
+    private JLabel setCaloriesBurnedLabel;
+    private JTextField setCaloriesBurnedField;
+    private JButton setCaloriesBurnedButton;
 
     //  main view's tabbed pane components
     private JTabbedPane dataEntryPane;
@@ -40,9 +46,7 @@ public class View {
     private JLabel foodEatenLabel;
     private JTextField foodEatenField;
     private JButton foodEatenButton;
-    private JLabel setCaloriesConsumedLabel;
-    private JTextField setCaloriesConsumedField;
-    private JButton setCaloriesConsumedButton;
+
 
     private JPanel exercisePanel;
     private JLabel selectExerciseLabel;
@@ -52,10 +56,6 @@ public class View {
     private JTextField exercisePerformedField;
     private JButton exercisePerformedButton;
     private JButton exerciseDiagramButton;
-    private JLabel setCaloriesBurnedLabel;
-    private JTextField setCaloriesBurnedField;
-    private JButton setCaloriesBurnedButton;
-
 
 
     public View(){
@@ -177,10 +177,12 @@ public class View {
         setCaloriesConsumedLabel = new JLabel("Manually Set The Calories Consumed:");
         setCaloriesConsumedField = new JTextField(5);
         setCaloriesConsumedButton = new JButton("Set");
+        setCaloriesConsumedButton.setFocusable(false);
 
         setCaloriesBurnedLabel = new JLabel("Manually Set The Calories Burned:");
         setCaloriesBurnedField = new JTextField(5);
         setCaloriesBurnedButton = new JButton("Set");
+        setCaloriesBurnedButton.setFocusable(false);
 
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
@@ -197,6 +199,7 @@ public class View {
         foodEatenLabel = new JLabel("food eaten Placeholder");
         foodEatenField = new JTextField(5);
         foodEatenButton = new JButton("Enter");
+        foodEatenButton.setFocusable(false);
 
         foodPanel.add(selectFoodLabel);
         foodPanel.add(foodDropdown);
@@ -214,10 +217,12 @@ public class View {
 
         exerciseInfoLabel = new JLabel("exercise info Placeholder");
         exerciseDiagramButton = new JButton("View Diagram");
+        exerciseDiagramButton.setFocusable(false);
 
         exercisePerformedLabel = new JLabel("exercise performed Placeholder");
         exercisePerformedField = new JTextField(5);
         exercisePerformedButton = new JButton("Enter");
+        exercisePerformedButton.setFocusable(false);
 
         exercisePanel.add(selectExerciseLabel);
         exercisePanel.add(exerciseDropdown);
@@ -241,12 +246,12 @@ public class View {
         mainPanel.add(dateLabel);
         mainPanel.add(caloriesConsumedLabel);
         mainPanel.add(caloriesBurnedLabel);
-        mainPanel.add(setCaloriesBurnedLabel);
-        mainPanel.add(setCaloriesBurnedField);
-        mainPanel.add(setCaloriesBurnedButton);
         mainPanel.add(setCaloriesConsumedLabel);
         mainPanel.add(setCaloriesConsumedField);
         mainPanel.add(setCaloriesConsumedButton);
+        mainPanel.add(setCaloriesBurnedLabel);
+        mainPanel.add(setCaloriesBurnedField);
+        mainPanel.add(setCaloriesBurnedButton);
 
         mainPanel.add(dataEntryPane);
 
@@ -263,6 +268,12 @@ public class View {
     }
 
     // Getters for various components
+
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
     public JPanel getLoginPanel() {
         return loginPanel;
     }
@@ -317,5 +328,21 @@ public class View {
 
     public JLabel getCaloriesConsumedLabel() {
         return caloriesConsumedLabel;
+    }
+
+    public JTextField getSetCaloriesConsumedField() {
+        return setCaloriesConsumedField;
+    }
+
+    public JButton getSetCaloriesConsumedButton() {
+        return setCaloriesConsumedButton;
+    }
+
+    public JTextField getSetCaloriesBurnedField() {
+        return setCaloriesBurnedField;
+    }
+
+    public JButton getSetCaloriesBurnedButton() {
+        return setCaloriesBurnedButton;
     }
 }

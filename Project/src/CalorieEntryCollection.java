@@ -91,4 +91,8 @@ public class CalorieEntryCollection {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public CalorieDataEntry getCurrentEntry(){
+        return entries.getLast();
+    }
 }

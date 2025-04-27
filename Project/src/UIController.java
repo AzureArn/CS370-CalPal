@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -45,6 +46,22 @@ public class UIController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectDate();
+            }
+        });
+
+        // setCaloriesConsumedButton
+        view.getSetCaloriesConsumedButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCaloriesConsumed();
+            }
+        });
+
+        // setCaloriesBurnedButton
+        view.getSetCaloriesBurnedButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCaloriesBurned();
             }
         });
     }
@@ -114,17 +131,70 @@ public class UIController {
     // ***MAIN VIEW***
 
     // dateDropdown's behavior
-    // update the date label, calories consumed label, and calories burned label to match the entry's data
+    // updates the date label, calories consumed label, and calories burned label to match the entry's data
     private void selectDate(){
         String date = (String) view.getDateDropdown().getSelectedItem();
         CalorieDataEntry entry = userDataManager.getEntry(date);
         // check if entry could not be found, should not occur in normal operation
         if(entry == null){
-            System.out.println("Something went wrong");
+            System.out.println("Something went wrong, entry could not be found");
             System.exit(10);
         }
         view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
         view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
         view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
+    }
+
+    // setCaloriesConsumedButton's behavior
+    // manually sets the calories consumed
+    private void setCaloriesConsumed(){
+        String input = view.getSetCaloriesConsumedField().getText();
+        int calories = 0;
+        try{
+            calories = Integer.parseInt(input);
+            if(calories < 0){
+                // create popup to show error if negative number is inputted
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                userDataManager.saveCalorieData(calories, userDataManager.getCurrentEntry().getCaloriesBurned());
+                // refresh the displayed calorie data
+                selectDate();
+            }
+        } catch (Exception nfe){
+            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    // setCaloriesConsumedButton's behavior
+    // manually sets the calories burned
+    private void setCaloriesBurned(){
+        String input = view.getSetCaloriesBurnedField().getText();
+        int calories = 0;
+        try{
+            calories = Integer.parseInt(input);
+            if(calories < 0){
+                // create popup to show error if negative number is inputted
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                userDataManager.saveCalorieData(userDataManager.getCurrentEntry().getCaloriesConsumed(), calories);
+                // refresh the displayed calorie data
+                selectDate();
+            }
+        } catch (Exception nfe){
+            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // foodEatenButton's behavior
+    private void addCaloriesConsumed(){
+
+    }
+
+    // exercisePerformedButton's behavior
+    private void addCaloriesBurned(){
+
     }
 }

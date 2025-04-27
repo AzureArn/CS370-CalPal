@@ -13,6 +13,10 @@ public class UserDataManager {
         return dataEntries.findEntry(LocalDate.parse(date));
     }
 
+    public CalorieDataEntry getCurrentEntry(){
+        return dataEntries.getCurrentEntry();
+    }
+
     // return the dates of all entries as an arraylist of strings
     public ArrayList<String> getAllDates(){
         ArrayList<String> dates = dataEntries.getAllDates();
