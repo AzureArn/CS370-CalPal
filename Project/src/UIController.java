@@ -16,6 +16,7 @@ public class UIController {
     public UIController(View view){
         this.view = view;
         loginManager = new UserLoginManager();
+        databaseManager = new DatabaseDataManager();
         // instantiate data manager later when a successful login occurs
         userDataManager = null;
 
@@ -66,7 +67,7 @@ public class UIController {
         });
     }
 
-    // create methods for each button / other component that sends action here
+    // create methods for each interactive component that sends action here
 
     // ***LOGIN VIEW***
 
@@ -143,6 +144,7 @@ public class UIController {
         view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
         view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
         view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
+        view.getNetCalorieIntakeLabel().setText("Net Intake: " + entry.getNetCalories());
     }
 
     // setCaloriesConsumedButton's behavior
@@ -158,6 +160,8 @@ public class UIController {
             }
             else{
                 userDataManager.saveCalorieData(calories, userDataManager.getCurrentEntry().getCaloriesBurned());
+                // move the dropdown selection to the current date
+                view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
                 // refresh the displayed calorie data
                 selectDate();
             }
@@ -180,6 +184,8 @@ public class UIController {
             }
             else{
                 userDataManager.saveCalorieData(userDataManager.getCurrentEntry().getCaloriesConsumed(), calories);
+                // move the dropdown selection to the current date
+                view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
                 // refresh the displayed calorie data
                 selectDate();
             }
@@ -188,13 +194,28 @@ public class UIController {
         }
     }
 
+    // foodDropdown's behavior
+    private void selectFood(){
+
+    }
+
     // foodEatenButton's behavior
     private void addCaloriesConsumed(){
 
     }
 
+    // exerciseDropdown's behavior
+    private void selectExercise(){
+
+    }
+
     // exercisePerformedButton's behavior
     private void addCaloriesBurned(){
+
+    }
+
+    // exerciseDiagramButton's behavior
+    private void showDiagram(){
 
     }
 }

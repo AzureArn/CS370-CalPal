@@ -29,6 +29,7 @@ public class View {
     private JLabel dateLabel;
     private JLabel caloriesConsumedLabel;
     private JLabel caloriesBurnedLabel;
+    private JLabel netCalorieIntakeLabel;
     private JLabel setCaloriesConsumedLabel;
     private JTextField setCaloriesConsumedField;
     private JButton setCaloriesConsumedButton;
@@ -173,6 +174,7 @@ public class View {
         dateLabel = new JLabel("dateplaceholder");
         caloriesConsumedLabel = new JLabel("consumedplaceholder");
         caloriesBurnedLabel = new JLabel("burnedplaceholder");
+        netCalorieIntakeLabel = new JLabel("netcalorieplaceholder");
 
         setCaloriesConsumedLabel = new JLabel("Manually Set The Calories Consumed:");
         setCaloriesConsumedField = new JTextField(5);
@@ -246,6 +248,7 @@ public class View {
         mainPanel.add(dateLabel);
         mainPanel.add(caloriesConsumedLabel);
         mainPanel.add(caloriesBurnedLabel);
+        mainPanel.add(netCalorieIntakeLabel);
         mainPanel.add(setCaloriesConsumedLabel);
         mainPanel.add(setCaloriesConsumedField);
         mainPanel.add(setCaloriesConsumedButton);
@@ -328,6 +331,10 @@ public class View {
 
     public JLabel getCaloriesConsumedLabel() {
         return caloriesConsumedLabel;
+    }
+
+    public JLabel getNetCalorieIntakeLabel() {
+        return netCalorieIntakeLabel;
     }
 
     public JTextField getSetCaloriesConsumedField() {
