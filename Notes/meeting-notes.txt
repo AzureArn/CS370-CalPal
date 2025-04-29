@@ -26,3 +26,10 @@
   - Considering splitting up the login code between a primary controller
 - Discussed how we might move forward and how we have some difficulty with how little actual written/designed code we have at the moment
 - Worked on lab 9
+
+
+... lost some notes..? will find them
+
+4/29/25 Meeting 9
+- Discussed changes we had made on respective branches (Adam UI, Max Data Access, Ryan Control)
+- Tightening up screws and bolts before meeting today..
