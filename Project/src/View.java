@@ -198,7 +198,8 @@ public class View {
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
         foodDropdown.setEditable(true);
-        foodInfoLabel = new JLabel("food info Placeholder");
+        // gets first item in list
+        foodInfoLabel = new JLabel("Grams per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
         foodEatenLabel = new JLabel("food eaten Placeholder");
         foodEatenField = new JTextField(5);
