@@ -51,7 +51,7 @@ public class View {
 
     private JPanel exercisePanel;
     private JLabel selectExerciseLabel;
-    private JComboBox exerciseDropdown;
+    private JComboBox<Exercise> exerciseDropdown;
     private JLabel exerciseInfoLabel;
     private JLabel exercisePerformedLabel;
     private JTextField exercisePerformedField;
@@ -355,7 +355,19 @@ public class View {
         return setCaloriesBurnedButton;
     }
 
+    public JComboBox getFoodDropdown() {
+        return foodDropdown;
+    }
+
+    public JComboBox getExerciseDropdown() {
+        return exerciseDropdown;
+    }
+
     public JButton getExerciseDiagramButton() {
         return exerciseDiagramButton;
+    }
+
+    public JLabel getFoodInfoLabel() {
+        return foodInfoLabel;
     }
 }

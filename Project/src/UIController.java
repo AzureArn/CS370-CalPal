@@ -74,6 +74,18 @@ public class UIController {
                 showDiagram();
             }
         });
+
+        // foodDropdown
+        view.getFoodDropdown().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectFood();
+            }
+        });
+
+
+        // exerciseDropdown
+
     }
 
     // create methods for each interactive component that sends action here
@@ -205,7 +217,8 @@ public class UIController {
 
     // foodDropdown's behavior
     private void selectFood(){
-
+        FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
+        view.getFoodInfoLabel().setText("Grams per serving: " + item.getGramsPerServing() + ", Calories per serving: " + item.getCaloriesPerServing());
     }
 
     // foodEatenButton's behavior

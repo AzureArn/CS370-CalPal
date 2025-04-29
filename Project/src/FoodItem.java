@@ -9,6 +9,17 @@ public class FoodItem {
         this.gramsPerServing = gramsPerServing;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getCaloriesPerServing() {
+        return caloriesPerServing;
+    }
+
+    public int getGramsPerServing() {
+        return gramsPerServing;
+    }
 
     public String display() { return this.name + " " + this.caloriesPerServing + " " + this.gramsPerServing; }
 
