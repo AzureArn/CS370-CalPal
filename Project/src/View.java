@@ -352,4 +352,8 @@ public class View {
     public JButton getSetCaloriesBurnedButton() {
         return setCaloriesBurnedButton;
     }
+
+    public JButton getExerciseDiagramButton() {
+        return exerciseDiagramButton;
+    }
 }

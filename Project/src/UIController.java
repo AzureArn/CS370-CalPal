@@ -65,6 +65,15 @@ public class UIController {
                 setCaloriesBurned();
             }
         });
+
+
+        // showDiagramButton
+        view.getExerciseDiagramButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showDiagram();
+            }
+        });
     }
 
     // create methods for each interactive component that sends action here
@@ -216,6 +225,13 @@ public class UIController {
 
     // exerciseDiagramButton's behavior
     private void showDiagram(){
+        // frame to contain image
+        JFrame popup = new JFrame();
+        ImageIcon image = new ImageIcon(TextFileHandler.getFile("maxwell.jpg").getAbsolutePath());
+        JLabel imageLabel = new JLabel(image);
+        popup.setSize(image.getIconWidth(), image.getIconHeight());
+        popup.add(imageLabel);
 
+        popup.setVisible(true);
     }
 }
