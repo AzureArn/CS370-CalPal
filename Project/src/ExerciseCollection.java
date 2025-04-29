@@ -7,4 +7,6 @@ public class ExerciseCollection {
         return new ExerciseDAO().getByName(name);
     }
 
+    public ArrayList<Exercise> getExercises(){ return exercises; }
+
 }

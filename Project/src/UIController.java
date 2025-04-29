@@ -227,10 +227,11 @@ public class UIController {
     private void showDiagram(){
         // frame to contain image
         JFrame popup = new JFrame();
-        ImageIcon image = new ImageIcon(TextFileHandler.getFile("maxwell.jpg").getAbsolutePath());
+        ImageIcon image = new ImageIcon(TextFileHandler.getFile("default.png").getAbsolutePath());
         JLabel imageLabel = new JLabel(image);
         popup.setSize(image.getIconWidth(), image.getIconHeight());
         popup.add(imageLabel);
+        popup.setLocationRelativeTo(null);
 
         popup.setVisible(true);
     }

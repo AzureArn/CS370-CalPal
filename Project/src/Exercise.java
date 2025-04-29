@@ -23,8 +23,8 @@ public class Exercise {
         this.caloriesPerUnitExercise = caloriesPerUnitExercise;
     }
 
+    public String display(){ return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise; } // change image obv.. just for demonstration right now
+
     @Override
-    public String toString() {
-        return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise; // change image obv.. just for demonstration right now
-    }
+    public String toString() { return name; }
 }

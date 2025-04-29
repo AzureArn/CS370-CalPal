@@ -9,9 +9,9 @@ public class FoodItem {
         this.gramsPerServing = gramsPerServing;
     }
 
-    @Override
-    public String toString(){
 
-        return this.name + " " + this.caloriesPerServing + " " + this.gramsPerServing;
-    }
+    public String display() { return this.name + " " + this.caloriesPerServing + " " + this.gramsPerServing; }
+
+    @Override
+    public String toString(){ return this.name; }
 }

@@ -193,8 +193,10 @@ public class View {
         foodPanel = new JPanel();
 
         selectFoodLabel = new JLabel("Select/Search For Food Item:");
-        String[] testFood = {"Apple", "Pear"};
-        foodDropdown = new JComboBox(testFood);
+
+        DatabaseDataManager db = new DatabaseDataManager();
+
+        foodDropdown = new JComboBox(db.getFoods().toArray());
         foodDropdown.setEditable(true);
         foodInfoLabel = new JLabel("food info Placeholder");
 
@@ -214,8 +216,8 @@ public class View {
         // exercise panel
         exercisePanel = new JPanel();
         selectExerciseLabel = new JLabel("Select Exercise:");
-        String[] testExercise = {"a", "b"};
-        exerciseDropdown = new JComboBox(testExercise);
+
+        exerciseDropdown = new JComboBox(db.getExercises().toArray());
 
         exerciseInfoLabel = new JLabel("exercise info Placeholder");
         exerciseDiagramButton = new JButton("View Diagram");
