@@ -370,4 +370,24 @@ public class View {
     public JLabel getFoodInfoLabel() {
         return foodInfoLabel;
     }
+
+    public JLabel getExerciseInfoLabel() {
+        return exerciseInfoLabel;
+    }
+
+    public JButton getFoodEatenButton() {
+        return foodEatenButton;
+    }
+
+    public JTextField getFoodEatenField() {
+        return foodEatenField;
+    }
+
+    public JButton getExercisePerformedButton() {
+        return exercisePerformedButton;
+    }
+
+    public JTextField getExercisePerformedField() {
+        return exercisePerformedField;
+    }
 }

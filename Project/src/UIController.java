@@ -83,9 +83,29 @@ public class UIController {
             }
         });
 
-
         // exerciseDropdown
+        view.getExerciseDropdown().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectExercise();
+            }
+        });
 
+        // foodEatenButton
+        view.getFoodEatenButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCaloriesConsumed();
+            }
+        });
+
+        // exercisePerformedButton
+        view.getExercisePerformedButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCaloriesBurned();
+            }
+        });
     }
 
     // create methods for each interactive component that sends action here
@@ -115,6 +135,7 @@ public class UIController {
 
     // loginButton's behavior
     // attempts to log user in, switches screen if successful
+    // sets up the date dropdown menu
     private void logIn(){
         // get the name and password from the field
         String name = view.getUserField().getText().strip().toLowerCase();
@@ -223,17 +244,54 @@ public class UIController {
 
     // foodEatenButton's behavior
     private void addCaloriesConsumed(){
-
+        FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
+        String servings = view.getFoodEatenField().getText();
+        int calsConsumed = 0;
+        try{
+            calsConsumed = Integer.parseInt(servings) * item.getCaloriesPerServing();
+            if(calsConsumed < 0){
+                // create popup to show error if negative number is inputted
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                userDataManager.saveCalorieData(userDataManager.getCurrentEntry().getCaloriesConsumed() + calsConsumed, userDataManager.getCurrentEntry().getCaloriesBurned());
+                // move the dropdown selection to the current date
+                view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
+                // refresh the displayed calorie data
+                selectDate();
+            }
+        } catch (Exception nfe){
+            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // exerciseDropdown's behavior
     private void selectExercise(){
-
+        Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
+        view.getExerciseInfoLabel().setText("Calories burned per rep / mile ran: " + exercise.getCaloriesPerUnitExercise());
     }
 
     // exercisePerformedButton's behavior
     private void addCaloriesBurned(){
-
+        Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
+        String exercisePerformed = view.getExercisePerformedField().getText();
+        int calsBurned = 0;
+        try{
+            calsBurned = Integer.parseInt(exercisePerformed) * exercise.getCaloriesPerUnitExercise();
+            if(calsBurned < 0){
+                // create popup to show error if negative number is inputted
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                userDataManager.saveCalorieData(userDataManager.getCurrentEntry().getCaloriesConsumed(), userDataManager.getCurrentEntry().getCaloriesBurned() + calsBurned);
+                // move the dropdown selection to the current date
+                view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
+                // refresh the displayed calorie data
+                selectDate();
+            }
+        } catch (Exception nfe){
+            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // exerciseDiagramButton's behavior
