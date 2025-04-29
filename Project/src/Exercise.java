@@ -23,6 +23,12 @@ public class Exercise {
         this.caloriesPerUnitExercise = caloriesPerUnitExercise;
     }
 
+    public String getName(){ return name; }
+
+    public BufferedImage getImage(){ return diagramImage; }
+
+    public int getCaloriesPerUnitExercise(){ return caloriesPerUnitExercise; }
+
     public String display(){ return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise; } // change image obv.. just for demonstration right now
 
     @Override
