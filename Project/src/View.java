@@ -199,9 +199,9 @@ public class View {
         foodDropdown = new JComboBox(db.getFoods().toArray());
         foodDropdown.setEditable(true);
         // gets first item in list
-        foodInfoLabel = new JLabel("Grams per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
+        foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
-        foodEatenLabel = new JLabel("food eaten Placeholder");
+        foodEatenLabel = new JLabel("Enter Servings: ");
         foodEatenField = new JTextField(5);
         foodEatenButton = new JButton("Enter");
         foodEatenButton.setFocusable(false);
@@ -220,11 +220,13 @@ public class View {
 
         exerciseDropdown = new JComboBox(db.getExercises().toArray());
 
-        exerciseInfoLabel = new JLabel("exercise info Placeholder");
+        exerciseInfoLabel = new JLabel("Calories Burned Per Rep / Mile Ran: " + db.viewExercise(db.getExercises().getFirst().getName()).getCaloriesPerUnitExercise());
         exerciseDiagramButton = new JButton("View Diagram");
         exerciseDiagramButton.setFocusable(false);
 
-        exercisePerformedLabel = new JLabel("exercise performed Placeholder");
+        //TODO: update exercise class and related files, etc., to indicate if it is
+        // a cardio exercise or not, update label to match the type
+        exercisePerformedLabel = new JLabel("Enter The Reps Performed / Miles ran: ");
         exercisePerformedField = new JTextField(5);
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
@@ -239,9 +241,9 @@ public class View {
 
 
         // add the panels to the tabbed pane
-        dataEntryPane.addTab("Food", null, foodPanel, "Use this tab to search food data and" +
+        dataEntryPane.addTab("Food Data", null, foodPanel, "Use this tab to search food data and" +
                 " to input the amount of food eaten");
-        dataEntryPane.addTab("Exercise", null, exercisePanel, "Use this tab to search exercise data, " +
+        dataEntryPane.addTab("Exercise Data", null, exercisePanel, "Use this tab to search exercise data, " +
                 "to input the amount of exercise performed, and to view exercise diagrams");
 
         // add components to the main panel
