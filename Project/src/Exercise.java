@@ -23,7 +23,7 @@ public class Exercise {
 
     public int getCaloriesPerUnitExercise(){ return caloriesPerUnitExercise; }
 
-    public boolean isCardio() { return isCardio; }
+    public boolean getIsCardio() { return isCardio; }
 
     public String display(){ return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise + Boolean.toString(this.isCardio); } // change image obv.. just for demonstration right now
 

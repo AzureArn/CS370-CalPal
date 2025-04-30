@@ -221,12 +221,11 @@ public class View {
         exerciseDropdown = new JComboBox(db.getExercises().toArray());
 
         exerciseInfoLabel = new JLabel("Calories Burned Per Rep / Mile Ran: " + db.viewExercise(db.getExercises().getFirst().getName()).getCaloriesPerUnitExercise());
+
         exerciseDiagramButton = new JButton("View Diagram");
         exerciseDiagramButton.setFocusable(false);
 
-        //TODO: update exercise class and related files, etc., to indicate if it is
-        // a cardio exercise or not, update label to match the type
-        exercisePerformedLabel = new JLabel("Enter The Reps Performed / Miles ran: ");
+        exercisePerformedLabel = new JLabel("Enter The Reps Performed / Miles ran:");
         exercisePerformedField = new JTextField(5);
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
@@ -392,5 +391,9 @@ public class View {
 
     public JTextField getExercisePerformedField() {
         return exercisePerformedField;
+    }
+
+    public JLabel getExercisePerformedLabel() {
+        return exercisePerformedLabel;
     }
 }

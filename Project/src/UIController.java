@@ -162,6 +162,9 @@ public class UIController {
             // select last item in dateDropdown component by default, most recent date
             view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
 
+            // this call changes the exercisePerformedLabel to use the correct exercise units for the default item
+            selectExercise();
+
             // swap the view
             view.swapView();
         }
@@ -268,7 +271,15 @@ public class UIController {
     // exerciseDropdown's behavior
     private void selectExercise(){
         Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
-        view.getExerciseInfoLabel().setText("Calories burned per rep / mile ran: " + exercise.getCaloriesPerUnitExercise());
+        if(exercise.getIsCardio()){
+            view.getExerciseInfoLabel().setText("Calories Burned Per Mile Ran: " + exercise.getCaloriesPerUnitExercise());
+            view.getExercisePerformedLabel().setText("Enter The Miles Ran:");
+        }
+        else{
+            view.getExerciseInfoLabel().setText("Calories Burned Per Rep: " + exercise.getCaloriesPerUnitExercise());
+            view.getExercisePerformedLabel().setText("Enter The Reps Performed:");
+        }
+
     }
 
     // exercisePerformedButton's behavior
@@ -277,7 +288,14 @@ public class UIController {
         String exercisePerformed = view.getExercisePerformedField().getText();
         int calsBurned = 0;
         try{
-            calsBurned = Integer.parseInt(exercisePerformed) * exercise.getCaloriesPerUnitExercise();
+            // if exercise is cardio one, accept input in the form of a double, otherwise only accept ints
+            if(exercise.getIsCardio()){
+                calsBurned = (int) (Double.parseDouble(exercisePerformed) * exercise.getCaloriesPerUnitExercise());
+            }
+            else{
+                calsBurned = Integer.parseInt(exercisePerformed) * exercise.getCaloriesPerUnitExercise();
+            }
+
             if(calsBurned < 0){
                 // create popup to show error if negative number is inputted
                 JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -290,7 +308,12 @@ public class UIController {
                 selectDate();
             }
         } catch (Exception nfe){
-            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if(exercise.getIsCardio()){
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
