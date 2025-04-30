@@ -297,9 +297,13 @@ public class UIController {
     // exerciseDiagramButton's behavior
     private void showDiagram(){
         // frame to contain image
+        Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
         JFrame popup = new JFrame();
-        ImageIcon image = new ImageIcon(TextFileHandler.getFile("default.png").getAbsolutePath());
+        ImageIcon image = new ImageIcon(exercise.getImage()); // gets last selected exercise's image
+
         JLabel imageLabel = new JLabel(image);
+        // image display setup
+
         popup.setSize(image.getIconWidth(), image.getIconHeight());
         popup.add(imageLabel);
         popup.setLocationRelativeTo(null);
