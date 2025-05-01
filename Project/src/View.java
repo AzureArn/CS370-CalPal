@@ -9,20 +9,20 @@ public class View {
     private JPanel loginPanel;
     // the main view
     private JPanel mainPanel;
-
     // login view components
+    private JPanel loginMenu;
     private JLabel userLabel;
     private JTextField userField;
-
     private JLabel passwordLabel;
     private JTextField passwordField;
-
     private JButton loginButton;
     private JButton createUserButton;
-
     private JLabel loginMessageLabel;
 
     // main view components
+    private JPanel dataPanel;
+
+
     private JLabel userNameDisplayLabel;
     private JLabel selectDayLabel;
     private JComboBox<String> dateDropdown;
@@ -81,93 +81,63 @@ public class View {
 
         // ***LOGIN VIEW SECTION***
         // Setup defaults
-        loginPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10,10,10,10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        loginPanel.setLayout(new BorderLayout(5,5));
+        loginMenu = new JPanel();
+        loginMenu.setLayout(new BoxLayout(loginMenu, BoxLayout.Y_AXIS));
+        Dimension minSize = new Dimension(5, 100);
+        Dimension prefSize = new Dimension(5, 100);
+        Dimension maxSize = new Dimension(Short.MAX_VALUE, 100);
+        loginMenu.add(new Box.Filler(minSize, prefSize, maxSize));
+
+        loginMessageLabel = new JLabel("Cal Pal");
+        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        loginMessageLabel.setForeground(Color.GREEN); // error color
+        loginPanel.add(loginMessageLabel);
+
+        // Error label
+        loginError = new JLabel("");
+        loginError.setFont(new Font("SansSerif", Font.BOLD, 14));
+        loginError.setForeground(Color.RED); // error color
+        loginPanel.add(loginError);
 
         //Username Label
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        loginPanel.add(new JLabel("Username:"),gbc);
+        loginPanel.add(new JLabel("Username:"));
         //Username Field
-        gbc.gridx = 2;
-        gbc.gridy = 1;
         userField = new JTextField(15);
-        loginPanel.add(userField,gbc);
+        loginPanel.add(userField);
 
         //Password Label
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        loginPanel.add(new JLabel("Password:"),gbc);
+        loginPanel.add(new JLabel("Password:"));
         //Password Field
-        gbc.gridx = 2;
-        gbc.gridy = 2;
         passwordField = new JPasswordField(15);
-        loginPanel.add(passwordField,gbc);
+        loginPanel.add(passwordField);
 
         //Buttons
         //New User button
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
         createUserButton = new JButton("Create User");
         createUserButton.setFocusable(false);
-        loginPanel.add(createUserButton, gbc);
+        loginPanel.add(createUserButton);
         // Login button
-        gbc.gridx = 3;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
         loginButton = new JButton("Login");
         loginButton.setFocusable(false);
-        loginPanel.add(loginButton, gbc);
-
-        // Error label
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 4; // Span across columns if needed
-        loginMessageLabel = new JLabel("");
-        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
-        loginMessageLabel.setForeground(Color.RED); // error color
-        loginPanel.add(loginMessageLabel, gbc);
-
-        /* username input components
-        userLabel = new JLabel("User Name:");
-        userField = new JTextField();
-        userField.setPreferredSize(new Dimension(100,25));
-
-        // password input components
-        passwordLabel = new JLabel("Password:");
-        passwordField = new JTextField();
-        passwordField.setPreferredSize(new Dimension(100,25));
-
-        //button to log in
-        loginButton = new JButton("Log In");
-        loginButton.setFocusable(false); // removes little border around text
-
-        // button to create user
-        createUserButton = new JButton("Create User");
-        createUserButton.setFocusable(false); // removes little border around text
-
-        // indicates if error occurred when adding user/logging in
-        loginMessageLabel = new JLabel();
-
-
-        loginPanel.add(userLabel);
-        loginPanel.add(userField);
-        loginPanel.add(passwordLabel);
-        loginPanel.add(passwordField);
-
         loginPanel.add(loginButton);
-        loginPanel.add(createUserButton);
-        loginPanel.add(loginMessageLabel);
-        */
 
         // only add the loginPanel the frame to start
         frame.getContentPane().add(loginPanel);
+        // ***END LOGIN VIEW SECTION*** //
+
 
         //***MAIN VIEW SECTION***
+
+        mainPanel.setLayout(new BorderLayout(5,5));
+
         userNameDisplayLabel = new JLabel();
+        userNameDisplayLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        mainPanel.add(userNameDisplayLabel, BorderLayout.NORTH);
+
+        dataPanel = new JPanel();
+        dataPanel.setLayout(new GridLayout(1,2));
+
 
         selectDayLabel = new JLabel("Select Day:");
         dateDropdown = new JComboBox<String>();
@@ -245,21 +215,21 @@ public class View {
                 "to input the amount of exercise performed, and to view exercise diagrams");
 
         // add components to the main panel
-        mainPanel.add(userNameDisplayLabel);
-        mainPanel.add(selectDayLabel);
-        mainPanel.add(dateDropdown);
-        mainPanel.add(dateLabel);
-        mainPanel.add(caloriesConsumedLabel);
-        mainPanel.add(caloriesBurnedLabel);
-        mainPanel.add(netCalorieIntakeLabel);
-        mainPanel.add(setCaloriesConsumedLabel);
-        mainPanel.add(setCaloriesConsumedField);
-        mainPanel.add(setCaloriesConsumedButton);
-        mainPanel.add(setCaloriesBurnedLabel);
-        mainPanel.add(setCaloriesBurnedField);
-        mainPanel.add(setCaloriesBurnedButton);
-
-        mainPanel.add(dataEntryPane);
+//        mainPanel.add(userNameDisplayLabel);
+//        mainPanel.add(selectDayLabel);
+//        mainPanel.add(dateDropdown);
+//        mainPanel.add(dateLabel);
+//        mainPanel.add(caloriesConsumedLabel);
+//        mainPanel.add(caloriesBurnedLabel);
+//        mainPanel.add(netCalorieIntakeLabel);
+//        mainPanel.add(setCaloriesConsumedLabel);
+//        mainPanel.add(setCaloriesConsumedField);
+//        mainPanel.add(setCaloriesConsumedButton);
+//        mainPanel.add(setCaloriesBurnedLabel);
+//        mainPanel.add(setCaloriesBurnedField);
+//        mainPanel.add(setCaloriesBurnedButton);
+//
+//        mainPanel.add(dataEntryPane);
 
         frame.setVisible(true);
     }
@@ -301,7 +271,7 @@ public class View {
     }
 
     public JLabel getLoginMessageLabel() {
-        return loginMessageLabel;
+        return loginError;
     }
 
     public JTextField getUserField() {
