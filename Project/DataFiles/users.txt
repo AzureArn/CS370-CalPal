@@ -6,3 +6,4 @@ capitaltest2::123
 beans!::beans!
 testt::test
 alan::alan
+tesst::te

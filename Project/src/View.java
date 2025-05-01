@@ -202,7 +202,9 @@ public class View {
         foodDropdown = new JComboBox(db.getFoods().toArray());
         //foodDropdown.setEditable(true);
         // gets first item in list
-        foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
+        foodInfoLabel = new JLabel("Grams per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
+
+        foodFilterField = new JTextField(10);
         foodFilterField = new JTextField(10);
 
         foodEatenLabel = new JLabel("Enter Servings: ");
@@ -230,7 +232,7 @@ public class View {
         exerciseDiagramButton = new JButton("View Diagram");
         exerciseDiagramButton.setFocusable(false);
 
-        exercisePerformedLabel = new JLabel("Enter The Reps Performed / Miles ran:");
+        exercisePerformedLabel = new JLabel("Enter The Sets Performed (per 10 reps) / Miles ran:");
         exercisePerformedField = new JTextField(5);
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
