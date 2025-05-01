@@ -263,7 +263,7 @@ public class UIController {
     // foodDropdown's behavior
     private void selectFood(){
         FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
-        if(item == null){
+        if(item == null || item.getName().equals("N/A")){
             view.getFoodInfoLabel().setText("No food selected");
         }
         else{
@@ -278,7 +278,7 @@ public class UIController {
         int calsConsumed = 0;
         try{
             // if item is null, an item isn't selected and the user must be informed of this
-            if(item == null){
+            if(item == null || item.getName().equals("N/A")){
                 JOptionPane.showMessageDialog(view.getFrame(), "Select a food item first", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -313,9 +313,9 @@ public class UIController {
     }
 
     // foodFilterField's behavior
-    // adjust the items visible in the dropdown to match the filter
+    // adjust the items visible in the dropdown to match the filter as the text is inputted and changed
     private void filterItems(){
-        String filterText = view.getFoodFilterField().getText().toLowerCase();
+        String filterText = view.getFoodFilterField().getText().toLowerCase().strip();
         ArrayList<FoodItem> items = databaseManager.getFoods();
         // remove all items and then re-add the appropriate ones
         view.getFoodDropdown().removeAllItems();
@@ -325,6 +325,10 @@ public class UIController {
                 view.getFoodDropdown().addItem(item);
             }
         });
+        // if no items got added, add a placeholder food item to indicate this
+        if(view.getFoodDropdown().getItemCount() <= 0){
+            view.getFoodDropdown().addItem(new FoodItem("N/A", 0, 0));
+        }
     }
 
     // exercisePerformedButton's behavior
