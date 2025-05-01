@@ -197,7 +197,7 @@ public class View {
         DatabaseDataManager db = new DatabaseDataManager();
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
-        foodDropdown.setEditable(true);
+        // foodDropdown.setEditable(true);
         // gets first item in list
         foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
