@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -88,6 +90,25 @@ public class UIController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectExercise();
+            }
+        });
+
+        // foodFilter
+        // updates every time anything is entered
+        view.getFoodFilterField().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterItems();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterItems();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterItems();
             }
         });
 
@@ -242,7 +263,12 @@ public class UIController {
     // foodDropdown's behavior
     private void selectFood(){
         FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
-        view.getFoodInfoLabel().setText("Grams per serving: " + item.getGramsPerServing() + ", Calories per serving: " + item.getCaloriesPerServing());
+        if(item == null){
+            view.getFoodInfoLabel().setText("No food selected");
+        }
+        else{
+            view.getFoodInfoLabel().setText("Grams per serving: " + item.getGramsPerServing() + ", Calories per serving: " + item.getCaloriesPerServing());
+        }
     }
 
     // foodEatenButton's behavior
@@ -251,6 +277,11 @@ public class UIController {
         String servings = view.getFoodEatenField().getText();
         int calsConsumed = 0;
         try{
+            // if item is null, an item isn't selected and the user must be informed of this
+            if(item == null){
+                JOptionPane.showMessageDialog(view.getFrame(), "Select a food item first", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             calsConsumed = Integer.parseInt(servings) * item.getCaloriesPerServing();
             if(calsConsumed < 0){
                 // create popup to show error if negative number is inputted
@@ -279,7 +310,21 @@ public class UIController {
             view.getExerciseInfoLabel().setText("Calories Burned Per Rep: " + exercise.getCaloriesPerUnitExercise());
             view.getExercisePerformedLabel().setText("Enter The Reps Performed:");
         }
+    }
 
+    // foodFilterField's behavior
+    // adjust the items visible in the dropdown to match the filter
+    private void filterItems(){
+        String filterText = view.getFoodFilterField().getText().toLowerCase();
+        ArrayList<FoodItem> items = databaseManager.getFoods();
+        // remove all items and then re-add the appropriate ones
+        view.getFoodDropdown().removeAllItems();
+        // for each item that begins with the filter text, re-add it to the list
+        items.forEach(item -> {
+            if(filterText.isEmpty() || item.getName().toLowerCase().startsWith(filterText)) {
+                view.getFoodDropdown().addItem(item);
+            }
+        });
     }
 
     // exercisePerformedButton's behavior

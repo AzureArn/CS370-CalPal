@@ -42,7 +42,10 @@ public class View {
 
     private JPanel foodPanel;
     private JLabel selectFoodLabel;
+
     private JComboBox foodDropdown;
+    private JTextField foodFilterField;
+
     private JLabel foodInfoLabel;
     private JLabel foodEatenLabel;
     private JTextField foodEatenField;
@@ -197,9 +200,10 @@ public class View {
         DatabaseDataManager db = new DatabaseDataManager();
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
-        foodDropdown.setEditable(true);
+        //foodDropdown.setEditable(true);
         // gets first item in list
         foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
+        foodFilterField = new JTextField(10);
 
         foodEatenLabel = new JLabel("Enter Servings: ");
         foodEatenField = new JTextField(5);
@@ -208,6 +212,7 @@ public class View {
 
         foodPanel.add(selectFoodLabel);
         foodPanel.add(foodDropdown);
+        foodPanel.add(foodFilterField);
         foodPanel.add(foodInfoLabel);
         foodPanel.add(foodEatenLabel);
         foodPanel.add(foodEatenField);
@@ -359,6 +364,10 @@ public class View {
 
     public JComboBox getFoodDropdown() {
         return foodDropdown;
+    }
+
+    public JTextField getFoodFilterField() {
+        return foodFilterField;
     }
 
     public JComboBox getExerciseDropdown() {
