@@ -81,21 +81,14 @@ public class View {
 
 
         // ***LOGIN VIEW SECTION***
-        // Setup defaults
-        //loginPanel.setLayout(new BorderLayout(5,5));
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
-        JPanel userNameEntryPanel = new JPanel(); // panel for username entry
+        Dimension panelSize = new Dimension(SIZE_X, 100);
+        JPanel userNameEntryPanel = new JPanel(); // panel for username entry, used for laying out UI
         JPanel passwordEntryPanel = new JPanel(); // panel for password entry
-        //loginMenu.setLayout(new BoxLayout(loginMenu, BoxLayout.Y_AXIS));
-        Dimension minSize = new Dimension(5, 100);
-        Dimension prefSize = new Dimension(5, 100);
-        Dimension maxSize = new Dimension(Short.MAX_VALUE, 100);
-        //loginMenu.add(new Box.Filler(minSize, prefSize, maxSize));
-
-//        loginMessageLabel = new JLabel("Cal Pal");
-//        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-//        loginMessageLabel.setForeground(Color.GREEN);
-//        userNameEntryPanel.add(loginMessageLabel);
+        JPanel credentialEntryPanel = new JPanel(); // contains buttons for entering the credentials
+        userNameEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
+        passwordEntryPanel.setMaximumSize(panelSize);
+        credentialEntryPanel.setMaximumSize(panelSize);
 
         //label at top displaying app's name, Cal Pal
         calPalLabel = new JLabel("Cal Pal");
@@ -125,12 +118,14 @@ public class View {
         createUserButton = new JButton("Create User");
         createUserButton.setFocusable(false);
         createUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(createUserButton);
+        credentialEntryPanel.add(createUserButton);
         // Login button
         loginButton = new JButton("Login");
         loginButton.setFocusable(false);
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(loginButton);
+        credentialEntryPanel.add(loginButton);
+
+        loginPanel.add(credentialEntryPanel);
 
         // Status label
         loginPageStatusLabel = new JLabel("");
