@@ -82,18 +82,22 @@ public class View {
 
         // ***LOGIN VIEW SECTION***
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
-        Dimension panelSize = new Dimension(SIZE_X, 100);
         JPanel userNameEntryPanel = new JPanel(); // panel for username entry, used for laying out UI
         JPanel passwordEntryPanel = new JPanel(); // panel for password entry
         JPanel credentialEntryPanel = new JPanel(); // contains buttons for entering the credentials
+        // this is done to adjust the space underneath these panels
         userNameEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
-        passwordEntryPanel.setMaximumSize(panelSize);
-        credentialEntryPanel.setMaximumSize(panelSize);
+        passwordEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
+        credentialEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
 
         //label at top displaying app's name, Cal Pal
         calPalLabel = new JLabel("Cal Pal");
+        calPalLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
         calPalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(calPalLabel);
+
+        // add space between top label and other components
+        loginPanel.add(new Box.Filler((new Dimension(1, 50)), (new Dimension(1, 200)), (new Dimension(1, 200))));
 
         //Username Label
         userLabel = new JLabel("Username:");
