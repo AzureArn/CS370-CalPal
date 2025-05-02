@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -124,12 +125,14 @@ public class UIController {
 
         if(success){
             // use the message label to tell the user it was successful
-            view.getLoginMessageLabel().setText("User " + name + " created");
+            view.getLoginPageStatusLabel().setText("User " + name + " created");
+            view.getLoginPageStatusLabel().setForeground(Color.GREEN);
         }
         else{
             // use the message label to tell the user it was not successful
-            view.getLoginMessageLabel().setText("Could not add user," +
+            view.getLoginPageStatusLabel().setText("Could not add user," +
                     " name is either taken or name/password includes ':' character");
+            view.getLoginPageStatusLabel().setForeground(Color.RED);
         }
     }
 
@@ -167,7 +170,8 @@ public class UIController {
         }
         else{
             // use the message label to tell the user login was not successful
-            view.getLoginMessageLabel().setText("Could not log in");
+            view.getLoginPageStatusLabel().setText("Could not log in");
+            view.getLoginPageStatusLabel().setForeground(Color.RED);
         }
     }
 

@@ -5,3 +5,4 @@ capitaltest::123
 capitaltest2::123
 beans!::beans!
 testt::test
+a::b

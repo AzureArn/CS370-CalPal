@@ -10,14 +10,15 @@ public class View {
     // the main view
     private JPanel mainPanel;
     // login view components
-    private JPanel loginMenu;
+    private JLabel calPalLabel;
     private JLabel userLabel;
     private JTextField userField;
     private JLabel passwordLabel;
     private JTextField passwordField;
     private JButton loginButton;
     private JButton createUserButton;
-    private JLabel loginMessageLabel;
+    private JLabel loginPageStatusLabel;
+    private JLabel loginError;
 
     // main view components
     private JPanel dataPanel;
@@ -81,48 +82,63 @@ public class View {
 
         // ***LOGIN VIEW SECTION***
         // Setup defaults
-        loginPanel.setLayout(new BorderLayout(5,5));
-        loginMenu = new JPanel();
-        loginMenu.setLayout(new BoxLayout(loginMenu, BoxLayout.Y_AXIS));
+        //loginPanel.setLayout(new BorderLayout(5,5));
+        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
+        JPanel userNameEntryPanel = new JPanel(); // panel for username entry
+        JPanel passwordEntryPanel = new JPanel(); // panel for password entry
+        //loginMenu.setLayout(new BoxLayout(loginMenu, BoxLayout.Y_AXIS));
         Dimension minSize = new Dimension(5, 100);
         Dimension prefSize = new Dimension(5, 100);
         Dimension maxSize = new Dimension(Short.MAX_VALUE, 100);
-        loginMenu.add(new Box.Filler(minSize, prefSize, maxSize));
+        //loginMenu.add(new Box.Filler(minSize, prefSize, maxSize));
 
-        loginMessageLabel = new JLabel("Cal Pal");
-        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-        loginMessageLabel.setForeground(Color.GREEN); // error color
-        loginPanel.add(loginMessageLabel);
+//        loginMessageLabel = new JLabel("Cal Pal");
+//        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+//        loginMessageLabel.setForeground(Color.GREEN);
+//        userNameEntryPanel.add(loginMessageLabel);
 
-        // Error label
-        loginError = new JLabel("");
-        loginError.setFont(new Font("SansSerif", Font.BOLD, 14));
-        loginError.setForeground(Color.RED); // error color
-        loginPanel.add(loginError);
+        //label at top displaying app's name, Cal Pal
+        calPalLabel = new JLabel("Cal Pal");
+        calPalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginPanel.add(calPalLabel);
 
         //Username Label
-        loginPanel.add(new JLabel("Username:"));
+        userLabel = new JLabel("Username:");
+        userNameEntryPanel.add(userLabel);
         //Username Field
         userField = new JTextField(15);
-        loginPanel.add(userField);
+        userNameEntryPanel.add(userField);
+        userNameEntryPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginPanel.add(userNameEntryPanel);
 
         //Password Label
-        loginPanel.add(new JLabel("Password:"));
+        passwordLabel = new JLabel("Password:");
+        passwordEntryPanel.add(passwordLabel);
         //Password Field
         passwordField = new JPasswordField(15);
-        loginPanel.add(passwordField);
+        passwordEntryPanel.add(passwordField);
+        loginPanel.add(passwordEntryPanel);
+
 
         //Buttons
         //New User button
         createUserButton = new JButton("Create User");
         createUserButton.setFocusable(false);
+        createUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(createUserButton);
         // Login button
         loginButton = new JButton("Login");
         loginButton.setFocusable(false);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(loginButton);
 
-        // only add the loginPanel the frame to start
+        // Status label
+        loginPageStatusLabel = new JLabel("");
+        loginPageStatusLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        loginPageStatusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginPanel.add(loginPageStatusLabel);
+
+        // only add the loginPanel to the frame to start
         frame.getContentPane().add(loginPanel);
         // ***END LOGIN VIEW SECTION*** //
 
@@ -270,8 +286,8 @@ public class View {
         return passwordLabel;
     }
 
-    public JLabel getLoginMessageLabel() {
-        return loginError;
+    public JLabel getLoginPageStatusLabel() {
+        return loginPageStatusLabel;
     }
 
     public JTextField getUserField() {
