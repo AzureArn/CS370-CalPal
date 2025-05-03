@@ -21,9 +21,6 @@ public class View {
     private JLabel loginError;
 
     // main view components
-    private JPanel dataPanel;
-
-
     private JLabel userNameDisplayLabel;
     private JLabel selectDayLabel;
     private JComboBox<String> dateDropdown;
@@ -73,8 +70,8 @@ public class View {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // makes the program exit the JVM on close
 
-        final int SIZE_X = 1000; // 1920; // A standard resolution to use
-        final int SIZE_Y = 800; // 1080;
+        final int SIZE_X = 800; // 1920; // A standard resolution to use
+        final int SIZE_Y = 700; // 1080;
         frame.setSize(SIZE_X, SIZE_Y);
         //frame.setResizable(false); // prevents changing window from changing res size
         frame.setLocationRelativeTo(null); // makes the window centered upon creation, only do after sizing the frame
@@ -150,12 +147,31 @@ public class View {
         userNameDisplayLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         mainPanel.add(userNameDisplayLabel, BorderLayout.NORTH);
 
-        dataPanel = new JPanel();
-        dataPanel.setLayout(new GridLayout(1,2));
+        // The panel that contains every other component than the username label
+        // Split between upper panel and lower tabbed pane
+        JPanel mainContentPanel = new JPanel();
+        mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
+
+        // upper panel that contains the date dropdown and user's data, will be split in half between the two
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.X_AXIS));
+
+        // left and right sub panels in the upperPanel, respectively
+        JPanel datePanel = new JPanel();
+        datePanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        //datePanel.setMaximumSize(new Dimension(500, 300));
+        datePanel.setBorder(BorderFactory.createBevelBorder(1));
+        JPanel userDataPanel = new JPanel();
+        userDataPanel.setLayout(new BoxLayout(userDataPanel, BoxLayout.Y_AXIS));
+        userDataPanel.setBorder(BorderFactory.createBevelBorder(1));
 
 
         selectDayLabel = new JLabel("Select Day:");
         dateDropdown = new JComboBox<String>();
+
+        datePanel.add(selectDayLabel);
+        datePanel.add(dateDropdown);
+
         dateLabel = new JLabel("dateplaceholder");
         caloriesConsumedLabel = new JLabel("consumedplaceholder");
         caloriesBurnedLabel = new JLabel("burnedplaceholder");
@@ -166,10 +182,36 @@ public class View {
         setCaloriesConsumedButton = new JButton("Set");
         setCaloriesConsumedButton.setFocusable(false);
 
+        // place all components related to setting calories consumed into one panel
+        JPanel setCalConsumedPanel = new JPanel();
+        setCalConsumedPanel.add(setCaloriesConsumedLabel);
+        setCalConsumedPanel.add(setCaloriesConsumedField);
+        setCalConsumedPanel.add(setCaloriesConsumedButton);
+        setCalConsumedPanel.setBorder(BorderFactory.createBevelBorder(1));
+
         setCaloriesBurnedLabel = new JLabel("Manually Set The Calories Burned:");
         setCaloriesBurnedField = new JTextField(5);
         setCaloriesBurnedButton = new JButton("Set");
         setCaloriesBurnedButton.setFocusable(false);
+
+        // place all components related to setting calories burned into one panel
+        JPanel setCalBurnedPanel = new JPanel();
+        setCalBurnedPanel.add(setCaloriesBurnedLabel);
+        setCalBurnedPanel.add(setCaloriesBurnedField);
+        setCalBurnedPanel.add(setCaloriesBurnedButton);
+        setCalBurnedPanel.setBorder(BorderFactory.createBevelBorder(1));
+
+        userDataPanel.add(dateLabel);
+        userDataPanel.add(caloriesConsumedLabel);
+        userDataPanel.add(caloriesBurnedLabel);
+        userDataPanel.add(netCalorieIntakeLabel);
+        userDataPanel.add(setCalConsumedPanel);
+        userDataPanel.add(setCalBurnedPanel);
+
+        upperPanel.add(datePanel);
+        upperPanel.add(userDataPanel);
+
+        mainContentPanel.add(upperPanel);
 
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
@@ -243,9 +285,10 @@ public class View {
 //        mainPanel.add(setCaloriesBurnedLabel);
 //        mainPanel.add(setCaloriesBurnedField);
 //        mainPanel.add(setCaloriesBurnedButton);
-//
-//        mainPanel.add(dataEntryPane);
 
+        mainContentPanel.add(dataEntryPane);
+
+        mainPanel.add(mainContentPanel);
         frame.setVisible(true);
     }
 
