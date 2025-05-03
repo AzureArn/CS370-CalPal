@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 // view class, creates components to be interacted with by UIController
@@ -24,7 +25,6 @@ public class View {
     private JLabel userNameDisplayLabel;
     private JLabel selectDayLabel;
     private JComboBox<String> dateDropdown;
-    private JLabel dateLabel;
     private JLabel caloriesConsumedLabel;
     private JLabel caloriesBurnedLabel;
     private JLabel netCalorieIntakeLabel;
@@ -71,7 +71,7 @@ public class View {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // makes the program exit the JVM on close
 
         final int SIZE_X = 800; // 1920; // A standard resolution to use
-        final int SIZE_Y = 700; // 1080;
+        final int SIZE_Y = 600; // 1080;
         frame.setSize(SIZE_X, SIZE_Y);
         //frame.setResizable(false); // prevents changing window from changing res size
         frame.setLocationRelativeTo(null); // makes the window centered upon creation, only do after sizing the frame
@@ -159,23 +159,31 @@ public class View {
         // left and right sub panels in the upperPanel, respectively
         JPanel datePanel = new JPanel();
         datePanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
-        //datePanel.setMaximumSize(new Dimension(500, 300));
-        datePanel.setBorder(BorderFactory.createBevelBorder(1));
         JPanel userDataPanel = new JPanel();
         userDataPanel.setLayout(new BoxLayout(userDataPanel, BoxLayout.Y_AXIS));
-        userDataPanel.setBorder(BorderFactory.createBevelBorder(1));
 
 
         selectDayLabel = new JLabel("Select Day:");
         dateDropdown = new JComboBox<String>();
 
+        datePanel.setMaximumSize(new Dimension(1000,225));
+
         datePanel.add(selectDayLabel);
         datePanel.add(dateDropdown);
 
-        dateLabel = new JLabel("dateplaceholder");
         caloriesConsumedLabel = new JLabel("consumedplaceholder");
+        caloriesConsumedLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         caloriesBurnedLabel = new JLabel("burnedplaceholder");
+        caloriesBurnedLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         netCalorieIntakeLabel = new JLabel("netcalorieplaceholder");
+        netCalorieIntakeLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // place all data display labels in one panel
+        JPanel userDataDisplayPanel = new JPanel();
+        userDataDisplayPanel.setMaximumSize(new Dimension(1000,75));
+        userDataDisplayPanel.add(caloriesConsumedLabel);
+        userDataDisplayPanel.add(caloriesBurnedLabel);
+        userDataDisplayPanel.add(netCalorieIntakeLabel);
 
         setCaloriesConsumedLabel = new JLabel("Manually Set The Calories Consumed:");
         setCaloriesConsumedField = new JTextField(5);
@@ -184,10 +192,10 @@ public class View {
 
         // place all components related to setting calories consumed into one panel
         JPanel setCalConsumedPanel = new JPanel();
+        setCalConsumedPanel.setMaximumSize(new Dimension(1000,75));
         setCalConsumedPanel.add(setCaloriesConsumedLabel);
         setCalConsumedPanel.add(setCaloriesConsumedField);
         setCalConsumedPanel.add(setCaloriesConsumedButton);
-        setCalConsumedPanel.setBorder(BorderFactory.createBevelBorder(1));
 
         setCaloriesBurnedLabel = new JLabel("Manually Set The Calories Burned:");
         setCaloriesBurnedField = new JTextField(5);
@@ -196,15 +204,12 @@ public class View {
 
         // place all components related to setting calories burned into one panel
         JPanel setCalBurnedPanel = new JPanel();
+        setCalBurnedPanel.setMaximumSize(new Dimension(1000,75));
         setCalBurnedPanel.add(setCaloriesBurnedLabel);
         setCalBurnedPanel.add(setCaloriesBurnedField);
         setCalBurnedPanel.add(setCaloriesBurnedButton);
-        setCalBurnedPanel.setBorder(BorderFactory.createBevelBorder(1));
 
-        userDataPanel.add(dateLabel);
-        userDataPanel.add(caloriesConsumedLabel);
-        userDataPanel.add(caloriesBurnedLabel);
-        userDataPanel.add(netCalorieIntakeLabel);
+        userDataPanel.add(userDataDisplayPanel);
         userDataPanel.add(setCalConsumedPanel);
         userDataPanel.add(setCalBurnedPanel);
 
@@ -285,7 +290,7 @@ public class View {
 //        mainPanel.add(setCaloriesBurnedLabel);
 //        mainPanel.add(setCaloriesBurnedField);
 //        mainPanel.add(setCaloriesBurnedButton);
-
+        dataEntryPane.setMaximumSize(new Dimension(1000,300));
         mainContentPanel.add(dataEntryPane);
 
         mainPanel.add(mainContentPanel);
@@ -352,9 +357,6 @@ public class View {
         return dateDropdown;
     }
 
-    public JLabel getDateLabel(){
-        return dateLabel;
-    }
 
     public JLabel getCaloriesBurnedLabel() {
         return caloriesBurnedLabel;

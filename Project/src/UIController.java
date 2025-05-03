@@ -178,7 +178,7 @@ public class UIController {
     // ***MAIN VIEW***
 
     // dateDropdown's behavior
-    // updates the date label, calories consumed label, and calories burned label to match the entry's data
+    // updates the calories consumed label, calories burned label, and net intake label to match the entry's data
     private void selectDate(){
         String date = (String) view.getDateDropdown().getSelectedItem();
         CalorieDataEntry entry = userDataManager.getEntry(date);
@@ -187,7 +187,6 @@ public class UIController {
             System.out.println("Something went wrong, entry could not be found");
             System.exit(10);
         }
-        view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
         view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
         view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
         view.getNetCalorieIntakeLabel().setText("Net Intake: " + entry.getNetCalories());
