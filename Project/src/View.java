@@ -41,6 +41,7 @@ public class View {
     private JPanel foodPanel;
     private JLabel selectFoodLabel;
     private JComboBox foodDropdown;
+    private JTextField foodFilterField;
     private JLabel foodInfoLabel;
     private JLabel foodEatenLabel;
     private JTextField foodEatenField;
@@ -240,6 +241,7 @@ public class View {
 
         foodPanel.add(selectFoodLabel);
         foodPanel.add(foodDropdown);
+        foodPanel.add(foodFilterField);
         foodPanel.add(foodInfoLabel);
         foodPanel.add(foodEatenLabel);
         foodPanel.add(foodEatenField);
@@ -420,5 +422,13 @@ public class View {
 
     public JTextField getExercisePerformedField() {
         return exercisePerformedField;
+    }
+
+    public JLabel getExercisePerformedLabel() {
+        return exercisePerformedLabel;
+    }
+
+    public JTextField getFoodFilterField() {
+        return foodFilterField;
     }
 }

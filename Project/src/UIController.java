@@ -145,11 +145,11 @@ public class UIController {
 
         if(success){
             // use the message label to tell the user it was successful
-            view.getLoginMessageLabel().setText("User " + name + " created");
+            view.getLoginPageStatusLabel().setText("User " + name + " created");
         }
         else{
             // use the message label to tell the user it was not successful
-            view.getLoginMessageLabel().setText("Could not add user," +
+            view.getLoginPageStatusLabel().setText("Could not add user," +
                     " name is either taken or name/password includes ':' character");
         }
     }
@@ -191,7 +191,7 @@ public class UIController {
         }
         else{
             // use the message label to tell the user login was not successful
-            view.getLoginMessageLabel().setText("Could not log in");
+            view.getLoginPageStatusLabel().setText("Could not log in");
         }
     }
 
@@ -207,7 +207,6 @@ public class UIController {
             System.out.println("Something went wrong, entry could not be found");
             System.exit(10);
         }
-        view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
         view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
         view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
         view.getNetCalorieIntakeLabel().setText("Net Intake: " + entry.getNetCalories());
