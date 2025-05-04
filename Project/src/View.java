@@ -41,6 +41,7 @@ public class View {
     private JPanel foodPanel;
     private JLabel selectFoodLabel;
     private JComboBox foodDropdown;
+    private JLabel foodFilterLabel;
     private JTextField foodFilterField;
     private JLabel foodInfoLabel;
     private JLabel foodEatenLabel;
@@ -225,22 +226,24 @@ public class View {
         // food panel
         foodPanel = new JPanel();
 
-        selectFoodLabel = new JLabel("Select/Search For Food Item:");
+        selectFoodLabel = new JLabel("Select Food Item:");
 
         DatabaseDataManager db = new DatabaseDataManager();
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
-        foodDropdown.setEditable(true);
+        foodFilterLabel = new JLabel("Search:");
+        foodFilterField = new JTextField(10);
         // gets first item in list
-        foodInfoLabel = new JLabel("Grams per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
+        foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
-        foodEatenLabel = new JLabel("food eaten Placeholder");
+        foodEatenLabel = new JLabel("Enter Servings Eaten:");
         foodEatenField = new JTextField(5);
         foodEatenButton = new JButton("Enter");
         foodEatenButton.setFocusable(false);
 
         foodPanel.add(selectFoodLabel);
         foodPanel.add(foodDropdown);
+        foodPanel.add(foodFilterLabel);
         foodPanel.add(foodFilterField);
         foodPanel.add(foodInfoLabel);
         foodPanel.add(foodEatenLabel);
