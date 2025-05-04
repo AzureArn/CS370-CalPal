@@ -1,5 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -92,6 +93,25 @@ public class UIController {
             }
         });
 
+        // foodFilter
+        // updates every time anything is entered
+        view.getFoodFilterField().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterItems();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterItems();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterItems();
+            }
+        });
+
         // foodEatenButton
         view.getFoodEatenButton().addActionListener(new ActionListener() {
             @Override
@@ -125,14 +145,12 @@ public class UIController {
 
         if(success){
             // use the message label to tell the user it was successful
-            view.getLoginPageStatusLabel().setText("User " + name + " created");
-            view.getLoginPageStatusLabel().setForeground(Color.GREEN);
+            view.getLoginMessageLabel().setText("User " + name + " created");
         }
         else{
             // use the message label to tell the user it was not successful
-            view.getLoginPageStatusLabel().setText("Could not add user," +
+            view.getLoginMessageLabel().setText("Could not add user," +
                     " name is either taken or name/password includes ':' character");
-            view.getLoginPageStatusLabel().setForeground(Color.RED);
         }
     }
 
@@ -165,20 +183,22 @@ public class UIController {
             // select last item in dateDropdown component by default, most recent date
             view.getDateDropdown().setSelectedIndex(view.getDateDropdown().getItemCount() - 1);
 
+            // this call changes the exercisePerformedLabel to use the correct exercise units for the default item
+            selectExercise();
+
             // swap the view
             view.swapView();
         }
         else{
             // use the message label to tell the user login was not successful
-            view.getLoginPageStatusLabel().setText("Could not log in");
-            view.getLoginPageStatusLabel().setForeground(Color.RED);
+            view.getLoginMessageLabel().setText("Could not log in");
         }
     }
 
     // ***MAIN VIEW***
 
     // dateDropdown's behavior
-    // updates the calories consumed label, calories burned label, and net intake label to match the entry's data
+    // updates the date label, calories consumed label, and calories burned label to match the entry's data
     private void selectDate(){
         String date = (String) view.getDateDropdown().getSelectedItem();
         CalorieDataEntry entry = userDataManager.getEntry(date);
@@ -187,6 +207,7 @@ public class UIController {
             System.out.println("Something went wrong, entry could not be found");
             System.exit(10);
         }
+        view.getDateLabel().setText("Date Selected: " + entry.getEntryDate());
         view.getCaloriesConsumedLabel().setText("Calories Consumed: " + entry.getCaloriesConsumed());
         view.getCaloriesBurnedLabel().setText("Calories Burned: " + entry.getCaloriesBurned());
         view.getNetCalorieIntakeLabel().setText("Net Intake: " + entry.getNetCalories());
@@ -242,7 +263,12 @@ public class UIController {
     // foodDropdown's behavior
     private void selectFood(){
         FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
-        view.getFoodInfoLabel().setText("Grams per serving: " + item.getGramsPerServing() + ", Calories per serving: " + item.getCaloriesPerServing());
+        if(item == null || item.getName().equals("N/A")){
+            view.getFoodInfoLabel().setText("No food selected");
+        }
+        else{
+            view.getFoodInfoLabel().setText("Grams per serving: " + item.getGramsPerServing() + ", Calories per serving: " + item.getCaloriesPerServing());
+        }
     }
 
     // foodEatenButton's behavior
@@ -251,6 +277,11 @@ public class UIController {
         String servings = view.getFoodEatenField().getText();
         int calsConsumed = 0;
         try{
+            // if item is null, an item isn't selected and the user must be informed of this
+            if(item == null || item.getName().equals("N/A")){
+                JOptionPane.showMessageDialog(view.getFrame(), "Select a food item first", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             calsConsumed = Integer.parseInt(servings) * item.getCaloriesPerServing();
             if(calsConsumed < 0){
                 // create popup to show error if negative number is inputted
@@ -271,7 +302,33 @@ public class UIController {
     // exerciseDropdown's behavior
     private void selectExercise(){
         Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
-        view.getExerciseInfoLabel().setText("Calories burned per rep / mile ran: " + exercise.getCaloriesPerUnitExercise());
+        if(exercise.getIsCardio()){
+            view.getExerciseInfoLabel().setText("Calories Burned Per Mile Ran: " + exercise.getCaloriesPerUnitExercise());
+            view.getExercisePerformedLabel().setText("Enter The Miles Ran:");
+        }
+        else{
+            view.getExerciseInfoLabel().setText("Calories Burned Per Rep: " + exercise.getCaloriesPerUnitExercise());
+            view.getExercisePerformedLabel().setText("Enter The Reps Performed:");
+        }
+    }
+
+    // foodFilterField's behavior
+    // adjust the items visible in the dropdown to match the filter as the text is inputted and changed
+    private void filterItems(){
+        String filterText = view.getFoodFilterField().getText().toLowerCase().strip();
+        ArrayList<FoodItem> items = databaseManager.getFoods();
+        // remove all items and then re-add the appropriate ones
+        view.getFoodDropdown().removeAllItems();
+        // for each item that begins with the filter text, re-add it to the list
+        items.forEach(item -> {
+            if(filterText.isEmpty() || item.getName().toLowerCase().startsWith(filterText)) {
+                view.getFoodDropdown().addItem(item);
+            }
+        });
+        // if no items got added, add a placeholder food item to indicate this
+        if(view.getFoodDropdown().getItemCount() <= 0){
+            view.getFoodDropdown().addItem(new FoodItem("N/A", 0, 0));
+        }
     }
 
     // exercisePerformedButton's behavior
@@ -280,7 +337,14 @@ public class UIController {
         String exercisePerformed = view.getExercisePerformedField().getText();
         int calsBurned = 0;
         try{
-            calsBurned = Integer.parseInt(exercisePerformed) * exercise.getCaloriesPerUnitExercise();
+            // if exercise is cardio one, accept input in the form of a double, otherwise only accept ints
+            if(exercise.getIsCardio()){
+                calsBurned = (int) (Double.parseDouble(exercisePerformed) * exercise.getCaloriesPerUnitExercise());
+            }
+            else{
+                calsBurned = Integer.parseInt(exercisePerformed) * exercise.getCaloriesPerUnitExercise();
+            }
+
             if(calsBurned < 0){
                 // create popup to show error if negative number is inputted
                 JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -293,16 +357,25 @@ public class UIController {
                 selectDate();
             }
         } catch (Exception nfe){
-            JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if(exercise.getIsCardio()){
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(view.getFrame(), "Enter a non-negative whole number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     // exerciseDiagramButton's behavior
     private void showDiagram(){
         // frame to contain image
+        Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
         JFrame popup = new JFrame();
-        ImageIcon image = new ImageIcon(TextFileHandler.getFile("default.png").getAbsolutePath());
+        ImageIcon image = new ImageIcon(exercise.getImage()); // gets last selected exercise's image
+
         JLabel imageLabel = new JLabel(image);
+        // image display setup
+
         popup.setSize(image.getIconWidth(), image.getIconHeight());
         popup.add(imageLabel);
         popup.setLocationRelativeTo(null);
