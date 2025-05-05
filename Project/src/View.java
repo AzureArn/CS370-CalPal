@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
@@ -222,9 +223,12 @@ public class View {
 
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
-
+        dataEntryPane.setBackground(new Color(30,30,30));
+        dataEntryPane.setForeground(Color.WHITE);
         // food panel
         foodPanel = new JPanel();
+        foodPanel.setLayout(new BoxLayout(foodPanel, BoxLayout.Y_AXIS));
+        foodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         selectFoodLabel = new JLabel("Select Food Item:");
 
@@ -236,8 +240,9 @@ public class View {
         // gets first item in list
         foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
-        foodEatenLabel = new JLabel("Enter Servings Eaten:");
+        foodEatenLabel = new JLabel("Servings Eaten:");
         foodEatenField = new JTextField(5);
+        foodEatenField.setToolTipText("Enter positive number");
         foodEatenButton = new JButton("Enter");
         foodEatenButton.setFocusable(false);
 
@@ -252,7 +257,7 @@ public class View {
 
 
         // exercise panel
-        exercisePanel = new JPanel();
+        exercisePanel = new JPanel(new BoxLayout(exercisePanel, BoxLayout.Y_AXIS));
         selectExerciseLabel = new JLabel("Select Exercise:");
 
         exerciseDropdown = new JComboBox(db.getExercises().toArray());
@@ -263,6 +268,7 @@ public class View {
 
         exercisePerformedLabel = new JLabel("exercise performed Placeholder");
         exercisePerformedField = new JTextField(5);
+        exercisePerformedField.setToolTipText("Enter positive number");
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
 
