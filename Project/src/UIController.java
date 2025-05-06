@@ -306,8 +306,8 @@ public class UIController {
             view.getExercisePerformedLabel().setText("Enter The Miles Ran:");
         }
         else{
-            view.getExerciseInfoLabel().setText("Calories Burned Per Rep: " + exercise.getCaloriesPerUnitExercise());
-            view.getExercisePerformedLabel().setText("Enter The Reps Performed:");
+            view.getExerciseInfoLabel().setText("Calories Burned Per Set (10 Reps): " + exercise.getCaloriesPerUnitExercise());
+            view.getExercisePerformedLabel().setText("Enter The Sets Performed:");
         }
     }
 
