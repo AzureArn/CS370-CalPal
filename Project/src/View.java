@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 // view class, creates components to be interacted with by UIController
@@ -9,24 +11,21 @@ public class View {
     private JPanel loginPanel;
     // the main view
     private JPanel mainPanel;
-
     // login view components
+    private JLabel calPalLabel;
     private JLabel userLabel;
     private JTextField userField;
-
     private JLabel passwordLabel;
     private JTextField passwordField;
-
     private JButton loginButton;
     private JButton createUserButton;
-
-    private JLabel loginMessageLabel;
+    private JLabel loginPageStatusLabel;
+    private JLabel loginError;
 
     // main view components
     private JLabel userNameDisplayLabel;
     private JLabel selectDayLabel;
     private JComboBox<String> dateDropdown;
-    private JLabel dateLabel;
     private JLabel caloriesConsumedLabel;
     private JLabel caloriesBurnedLabel;
     private JLabel netCalorieIntakeLabel;
@@ -42,10 +41,9 @@ public class View {
 
     private JPanel foodPanel;
     private JLabel selectFoodLabel;
-
     private JComboBox foodDropdown;
+    private JLabel foodFilterLabel;
     private JTextField foodFilterField;
-
     private JLabel foodInfoLabel;
     private JLabel foodEatenLabel;
     private JTextField foodEatenField;
@@ -75,143 +73,200 @@ public class View {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // makes the program exit the JVM on close
 
-        final int SIZE_X = 1000; // 1920; // A standard resolution to use
-        final int SIZE_Y = 800; // 1080;
+        final int SIZE_X = 800; // 1920; // A standard resolution to use
+        final int SIZE_Y = 600; // 1080;
         frame.setSize(SIZE_X, SIZE_Y);
         //frame.setResizable(false); // prevents changing window from changing res size
         frame.setLocationRelativeTo(null); // makes the window centered upon creation, only do after sizing the frame
 
 
         // ***LOGIN VIEW SECTION***
-        // Setup defaults
-        loginPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10,10,10,10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
+        loginPanel.setBackground(new Color(99, 177, 177));
+        JPanel userNameEntryPanel = new JPanel(); // panel for username entry, used for laying out UI
+        JPanel passwordEntryPanel = new JPanel(); // panel for password entry
+        JPanel credentialEntryPanel = new JPanel(); // contains buttons for entering the credentials
+        // this is done to adjust the space underneath these panels
+        userNameEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
+        passwordEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
+        credentialEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
+
+        //label at top displaying app's name, Cal Pal
+        loginPanel.add(new Box.Filler((new Dimension(1, 10)), (new Dimension(1, 10)), (new Dimension(1, 50))));
+        calPalLabel = new JLabel("Cal Pal");
+        calPalLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        calPalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginPanel.add(calPalLabel);
+
+        // add space between top label and other components
+        loginPanel.add(new Box.Filler((new Dimension(1, 50)), (new Dimension(1, 200)), (new Dimension(1, 200))));
+
+        JPanel loginBoxPanel = new JPanel();
+        loginBoxPanel.setLayout(new BoxLayout(loginBoxPanel, BoxLayout.Y_AXIS));
+        loginBoxPanel.setBackground(new Color(230, 230, 230));
+        loginBoxPanel.add(new Box.Filler((new Dimension(1, 1)), (new Dimension(1, 10)), (new Dimension(1, 20))));
 
         //Username Label
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        loginPanel.add(new JLabel("Username:"),gbc);
+        userLabel = new JLabel("Username:");
+        userNameEntryPanel.add(userLabel);
         //Username Field
-        gbc.gridx = 2;
-        gbc.gridy = 1;
         userField = new JTextField(15);
-        loginPanel.add(userField,gbc);
+        userNameEntryPanel.add(userField);
+        userNameEntryPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginBoxPanel.add(userNameEntryPanel);
 
         //Password Label
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        loginPanel.add(new JLabel("Password:"),gbc);
+        passwordLabel = new JLabel("Password:");
+        passwordEntryPanel.add(passwordLabel);
         //Password Field
-        gbc.gridx = 2;
-        gbc.gridy = 2;
         passwordField = new JPasswordField(15);
-        loginPanel.add(passwordField,gbc);
+        passwordEntryPanel.add(passwordField);
+        loginBoxPanel.add(passwordEntryPanel);
+
 
         //Buttons
         //New User button
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
         createUserButton = new JButton("Create User");
         createUserButton.setFocusable(false);
-        loginPanel.add(createUserButton, gbc);
+        createUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        credentialEntryPanel.add(createUserButton);
         // Login button
-        gbc.gridx = 3;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
         loginButton = new JButton("Login");
         loginButton.setFocusable(false);
-        loginPanel.add(loginButton, gbc);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        credentialEntryPanel.add(loginButton);
 
-        // Error label
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 4; // Span across columns if needed
-        loginMessageLabel = new JLabel("");
-        loginMessageLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
-        loginMessageLabel.setForeground(Color.RED); // error color
-        loginPanel.add(loginMessageLabel, gbc);
+        loginBoxPanel.add(credentialEntryPanel);
 
-        /* username input components
-        userLabel = new JLabel("User Name:");
-        userField = new JTextField();
-        userField.setPreferredSize(new Dimension(100,25));
+        // Status label
+        loginPageStatusLabel = new JLabel("");
+        loginPageStatusLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        loginPageStatusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginBoxPanel.add(loginPageStatusLabel);
 
-        // password input components
-        passwordLabel = new JLabel("Password:");
-        passwordField = new JTextField();
-        passwordField.setPreferredSize(new Dimension(100,25));
+        loginBoxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2)));
 
-        //button to log in
-        loginButton = new JButton("Log In");
-        loginButton.setFocusable(false); // removes little border around text
+        loginBoxPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center in BoxLayout
+        loginPanel.add(loginBoxPanel);
 
-        // button to create user
-        createUserButton = new JButton("Create User");
-        createUserButton.setFocusable(false); // removes little border around text
-
-        // indicates if error occurred when adding user/logging in
-        loginMessageLabel = new JLabel();
-
-
-        loginPanel.add(userLabel);
-        loginPanel.add(userField);
-        loginPanel.add(passwordLabel);
-        loginPanel.add(passwordField);
-
-        loginPanel.add(loginButton);
-        loginPanel.add(createUserButton);
-        loginPanel.add(loginMessageLabel);
-        */
-
-        // only add the loginPanel the frame to start
+        // only add the loginPanel to the frame to start
         frame.getContentPane().add(loginPanel);
+        // ***END LOGIN VIEW SECTION*** //
+
 
         //***MAIN VIEW SECTION***
+
+        mainPanel.setLayout(new BorderLayout(5,5));
+
         userNameDisplayLabel = new JLabel();
+        userNameDisplayLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
+        mainPanel.add(userNameDisplayLabel, BorderLayout.NORTH);
+
+        // The panel that contains every other component than the username label
+        // Split between upper panel and lower tabbed pane
+        JPanel mainContentPanel = new JPanel();
+        mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
+
+        // upper panel that contains the date dropdown and user's data, will be split in half between the two
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.X_AXIS));
+
+        // left and right sub panels in the upperPanel, respectively
+        JPanel datePanel = new JPanel();
+        datePanel.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        JPanel userDataPanel = new JPanel();
+        userDataPanel.setLayout(new BoxLayout(userDataPanel, BoxLayout.Y_AXIS));
+
 
         selectDayLabel = new JLabel("Select Day:");
         dateDropdown = new JComboBox<String>();
-        dateLabel = new JLabel("dateplaceholder");
+
+        datePanel.setMaximumSize(new Dimension(1000,225));
+
+        datePanel.add(selectDayLabel);
+        datePanel.add(dateDropdown);
+
         caloriesConsumedLabel = new JLabel("consumedplaceholder");
+        caloriesConsumedLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         caloriesBurnedLabel = new JLabel("burnedplaceholder");
+        caloriesBurnedLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         netCalorieIntakeLabel = new JLabel("netcalorieplaceholder");
+        netCalorieIntakeLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        // place all data display labels in one panel
+        JPanel userDataDisplayPanel = new JPanel();
+        userDataDisplayPanel.setMaximumSize(new Dimension(1000,75));
+        userDataDisplayPanel.add(caloriesConsumedLabel);
+        userDataDisplayPanel.add(caloriesBurnedLabel);
+        userDataDisplayPanel.add(netCalorieIntakeLabel);
 
         setCaloriesConsumedLabel = new JLabel("Manually Set The Calories Consumed:");
         setCaloriesConsumedField = new JTextField(5);
         setCaloriesConsumedButton = new JButton("Set");
         setCaloriesConsumedButton.setFocusable(false);
 
+        // place all components related to setting calories consumed into one panel
+        JPanel setCalConsumedPanel = new JPanel();
+        setCalConsumedPanel.setMaximumSize(new Dimension(1000,75));
+        setCalConsumedPanel.add(setCaloriesConsumedLabel);
+        setCalConsumedPanel.add(setCaloriesConsumedField);
+        setCalConsumedPanel.add(setCaloriesConsumedButton);
+
         setCaloriesBurnedLabel = new JLabel("Manually Set The Calories Burned:");
         setCaloriesBurnedField = new JTextField(5);
         setCaloriesBurnedButton = new JButton("Set");
         setCaloriesBurnedButton.setFocusable(false);
 
+        // place all components related to setting calories burned into one panel
+        JPanel setCalBurnedPanel = new JPanel();
+        setCalBurnedPanel.setMaximumSize(new Dimension(1000,75));
+        setCalBurnedPanel.add(setCaloriesBurnedLabel);
+        setCalBurnedPanel.add(setCaloriesBurnedField);
+        setCalBurnedPanel.add(setCaloriesBurnedButton);
+
+        userDataPanel.add(userDataDisplayPanel);
+        userDataPanel.add(setCalConsumedPanel);
+        userDataPanel.add(setCalBurnedPanel);
+
+        upperPanel.add(datePanel);
+        upperPanel.add(userDataPanel);
+
+        mainContentPanel.add(upperPanel);
+
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
-
+        dataEntryPane.setBackground(new Color(99, 177, 177));
+        dataEntryPane.setForeground(new Color(69, 64, 64));
         // food panel
-        foodPanel = new JPanel();
+        JPanel foodPanel = new JPanel();
+        foodPanel.setLayout(new BoxLayout( foodPanel, BoxLayout.Y_AXIS));
+        foodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        selectFoodLabel = new JLabel("Select/Search For Food Item:");
+
+        selectFoodLabel = new JLabel("Select Food Item:");
+        selectFoodLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         DatabaseDataManager db = new DatabaseDataManager();
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
-        //foodDropdown.setEditable(true);
+        foodDropdown.setMaximumSize(new Dimension(SIZE_X, 50));
+        foodFilterLabel = new JLabel("Search:");
+        foodFilterField = new JTextField(10);
+        foodFilterField.setMaximumSize(new Dimension(SIZE_X, 50));
         // gets first item in list
         foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
-        foodFilterField = new JTextField(10);
 
-        foodEatenLabel = new JLabel("Enter Servings: ");
+        foodEatenLabel = new JLabel("Servings Eaten:");
         foodEatenField = new JTextField(5);
+        foodEatenField.setMaximumSize(new Dimension(SIZE_X, 50));
+        foodEatenField.setToolTipText("Enter positive number");
         foodEatenButton = new JButton("Enter");
         foodEatenButton.setFocusable(false);
 
         foodPanel.add(selectFoodLabel);
+
         foodPanel.add(foodDropdown);
+        foodPanel.add(foodFilterLabel);
         foodPanel.add(foodFilterField);
         foodPanel.add(foodInfoLabel);
         foodPanel.add(foodEatenLabel);
@@ -220,18 +275,22 @@ public class View {
 
 
         // exercise panel
-        exercisePanel = new JPanel();
+        JPanel exercisePanel = new JPanel();
+        exercisePanel.setLayout(new BoxLayout(exercisePanel, BoxLayout.Y_AXIS));
+        exercisePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         selectExerciseLabel = new JLabel("Select Exercise:");
 
         exerciseDropdown = new JComboBox(db.getExercises().toArray());
+        exerciseDropdown.setMaximumSize(new Dimension(SIZE_X, 50));
 
-        exerciseInfoLabel = new JLabel("Calories Burned Per Rep / Mile Ran: " + db.viewExercise(db.getExercises().getFirst().getName()).getCaloriesPerUnitExercise());
-
+        exerciseInfoLabel = new JLabel("exercise info Placeholder");
         exerciseDiagramButton = new JButton("View Diagram");
         exerciseDiagramButton.setFocusable(false);
 
-        exercisePerformedLabel = new JLabel("Enter The Reps Performed / Miles ran:");
+        exercisePerformedLabel = new JLabel("exercise performed Placeholder");
         exercisePerformedField = new JTextField(5);
+        exercisePerformedField.setMaximumSize(new Dimension(SIZE_X, 50));
+        exercisePerformedField.setToolTipText("Enter positive number");
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
 
@@ -245,28 +304,29 @@ public class View {
 
 
         // add the panels to the tabbed pane
-        dataEntryPane.addTab("Food Data", null, foodPanel, "Use this tab to search food data and" +
+        dataEntryPane.addTab("Food", null, foodPanel, "Use this tab to search food data and" +
                 " to input the amount of food eaten");
-        dataEntryPane.addTab("Exercise Data", null, exercisePanel, "Use this tab to search exercise data, " +
+        dataEntryPane.addTab("Exercise", null, exercisePanel, "Use this tab to search exercise data, " +
                 "to input the amount of exercise performed, and to view exercise diagrams");
 
         // add components to the main panel
-        mainPanel.add(userNameDisplayLabel);
-        mainPanel.add(selectDayLabel);
-        mainPanel.add(dateDropdown);
-        mainPanel.add(dateLabel);
-        mainPanel.add(caloriesConsumedLabel);
-        mainPanel.add(caloriesBurnedLabel);
-        mainPanel.add(netCalorieIntakeLabel);
-        mainPanel.add(setCaloriesConsumedLabel);
-        mainPanel.add(setCaloriesConsumedField);
-        mainPanel.add(setCaloriesConsumedButton);
-        mainPanel.add(setCaloriesBurnedLabel);
-        mainPanel.add(setCaloriesBurnedField);
-        mainPanel.add(setCaloriesBurnedButton);
+//        mainPanel.add(userNameDisplayLabel);
+//        mainPanel.add(selectDayLabel);
+//        mainPanel.add(dateDropdown);
+//        mainPanel.add(dateLabel);
+//        mainPanel.add(caloriesConsumedLabel);
+//        mainPanel.add(caloriesBurnedLabel);
+//        mainPanel.add(netCalorieIntakeLabel);
+//        mainPanel.add(setCaloriesConsumedLabel);
+//        mainPanel.add(setCaloriesConsumedField);
+//        mainPanel.add(setCaloriesConsumedButton);
+//        mainPanel.add(setCaloriesBurnedLabel);
+//        mainPanel.add(setCaloriesBurnedField);
+//        mainPanel.add(setCaloriesBurnedButton);
+        dataEntryPane.setMaximumSize(new Dimension(1000,300));
+        mainContentPanel.add(dataEntryPane);
 
-        mainPanel.add(dataEntryPane);
-
+        mainPanel.add(mainContentPanel);
         frame.setVisible(true);
     }
 
@@ -306,8 +366,8 @@ public class View {
         return passwordLabel;
     }
 
-    public JLabel getLoginMessageLabel() {
-        return loginMessageLabel;
+    public JLabel getLoginPageStatusLabel() {
+        return loginPageStatusLabel;
     }
 
     public JTextField getUserField() {
@@ -330,9 +390,6 @@ public class View {
         return dateDropdown;
     }
 
-    public JLabel getDateLabel(){
-        return dateLabel;
-    }
 
     public JLabel getCaloriesBurnedLabel() {
         return caloriesBurnedLabel;
@@ -364,10 +421,6 @@ public class View {
 
     public JComboBox getFoodDropdown() {
         return foodDropdown;
-    }
-
-    public JTextField getFoodFilterField() {
-        return foodFilterField;
     }
 
     public JComboBox getExerciseDropdown() {
@@ -404,5 +457,9 @@ public class View {
 
     public JLabel getExercisePerformedLabel() {
         return exercisePerformedLabel;
+    }
+
+    public JTextField getFoodFilterField() {
+        return foodFilterField;
     }
 }

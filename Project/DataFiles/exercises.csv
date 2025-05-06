@@ -1,3 +1,9 @@
-exercise,image filename,calories per rep,is cardio
-a,default.png,10,true
-b,default.png,11,false
+exercise,image filename,calories per set(10reps)/mile,is cardio
+Light Jog/Run,default.png,100,true
+Sprint,default.png,100,true
+Bench Press,default.png,40,false
+Deadlift,default.png,80,false
+Squat,default.png,3,false
+Pull-up,default.png,10,false
+Push-up,default.png,3,false
+Cable-Rows,default.png,60,false
