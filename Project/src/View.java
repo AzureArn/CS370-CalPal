@@ -82,6 +82,7 @@ public class View {
 
         // ***LOGIN VIEW SECTION***
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
+        loginPanel.setBackground(new Color(99, 177, 177));
         JPanel userNameEntryPanel = new JPanel(); // panel for username entry, used for laying out UI
         JPanel passwordEntryPanel = new JPanel(); // panel for password entry
         JPanel credentialEntryPanel = new JPanel(); // contains buttons for entering the credentials
@@ -91,6 +92,7 @@ public class View {
         credentialEntryPanel.setMaximumSize(new Dimension(SIZE_X, 50));
 
         //label at top displaying app's name, Cal Pal
+        loginPanel.add(new Box.Filler((new Dimension(1, 10)), (new Dimension(1, 10)), (new Dimension(1, 50))));
         calPalLabel = new JLabel("Cal Pal");
         calPalLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
         calPalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -99,6 +101,11 @@ public class View {
         // add space between top label and other components
         loginPanel.add(new Box.Filler((new Dimension(1, 50)), (new Dimension(1, 200)), (new Dimension(1, 200))));
 
+        JPanel loginBoxPanel = new JPanel();
+        loginBoxPanel.setLayout(new BoxLayout(loginBoxPanel, BoxLayout.Y_AXIS));
+        loginBoxPanel.setBackground(new Color(230, 230, 230));
+        loginBoxPanel.add(new Box.Filler((new Dimension(1, 1)), (new Dimension(1, 10)), (new Dimension(1, 20))));
+
         //Username Label
         userLabel = new JLabel("Username:");
         userNameEntryPanel.add(userLabel);
@@ -106,7 +113,7 @@ public class View {
         userField = new JTextField(15);
         userNameEntryPanel.add(userField);
         userNameEntryPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(userNameEntryPanel);
+        loginBoxPanel.add(userNameEntryPanel);
 
         //Password Label
         passwordLabel = new JLabel("Password:");
@@ -114,7 +121,7 @@ public class View {
         //Password Field
         passwordField = new JPasswordField(15);
         passwordEntryPanel.add(passwordField);
-        loginPanel.add(passwordEntryPanel);
+        loginBoxPanel.add(passwordEntryPanel);
 
 
         //Buttons
@@ -129,13 +136,18 @@ public class View {
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         credentialEntryPanel.add(loginButton);
 
-        loginPanel.add(credentialEntryPanel);
+        loginBoxPanel.add(credentialEntryPanel);
 
         // Status label
         loginPageStatusLabel = new JLabel("");
         loginPageStatusLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         loginPageStatusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(loginPageStatusLabel);
+        loginBoxPanel.add(loginPageStatusLabel);
+
+        loginBoxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2)));
+
+        loginBoxPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center in BoxLayout
+        loginPanel.add(loginBoxPanel);
 
         // only add the loginPanel to the frame to start
         frame.getContentPane().add(loginPanel);
@@ -147,7 +159,7 @@ public class View {
         mainPanel.setLayout(new BorderLayout(5,5));
 
         userNameDisplayLabel = new JLabel();
-        userNameDisplayLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        userNameDisplayLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
         mainPanel.add(userNameDisplayLabel, BorderLayout.NORTH);
 
         // The panel that contains every other component than the username label
@@ -223,30 +235,36 @@ public class View {
 
         // Data entry section in the main view
         dataEntryPane = new JTabbedPane();
-        dataEntryPane.setBackground(new Color(30,30,30));
-        dataEntryPane.setForeground(Color.WHITE);
+        dataEntryPane.setBackground(new Color(99, 177, 177));
+        dataEntryPane.setForeground(new Color(69, 64, 64));
         // food panel
-        foodPanel = new JPanel();
-        foodPanel.setLayout(new BoxLayout(foodPanel, BoxLayout.Y_AXIS));
+        JPanel foodPanel = new JPanel();
+        foodPanel.setLayout(new BoxLayout( foodPanel, BoxLayout.Y_AXIS));
         foodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
+
         selectFoodLabel = new JLabel("Select Food Item:");
+        selectFoodLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         DatabaseDataManager db = new DatabaseDataManager();
 
         foodDropdown = new JComboBox(db.getFoods().toArray());
+        foodDropdown.setMaximumSize(new Dimension(SIZE_X, 50));
         foodFilterLabel = new JLabel("Search:");
         foodFilterField = new JTextField(10);
+        foodFilterField.setMaximumSize(new Dimension(SIZE_X, 50));
         // gets first item in list
         foodInfoLabel = new JLabel("Grams Per Serving: " + db.viewFood(db.getFoods().getFirst().getName()).getGramsPerServing() + ", Calories per serving: " + db.viewFood(db.getFoods().getFirst().getName()).getCaloriesPerServing());
 
         foodEatenLabel = new JLabel("Servings Eaten:");
         foodEatenField = new JTextField(5);
+        foodEatenField.setMaximumSize(new Dimension(SIZE_X, 50));
         foodEatenField.setToolTipText("Enter positive number");
         foodEatenButton = new JButton("Enter");
         foodEatenButton.setFocusable(false);
 
         foodPanel.add(selectFoodLabel);
+
         foodPanel.add(foodDropdown);
         foodPanel.add(foodFilterLabel);
         foodPanel.add(foodFilterField);
@@ -257,10 +275,13 @@ public class View {
 
 
         // exercise panel
-        exercisePanel = new JPanel(new BoxLayout(exercisePanel, BoxLayout.Y_AXIS));
+        JPanel exercisePanel = new JPanel();
+        exercisePanel.setLayout(new BoxLayout(exercisePanel, BoxLayout.Y_AXIS));
+        exercisePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         selectExerciseLabel = new JLabel("Select Exercise:");
 
         exerciseDropdown = new JComboBox(db.getExercises().toArray());
+        exerciseDropdown.setMaximumSize(new Dimension(SIZE_X, 50));
 
         exerciseInfoLabel = new JLabel("exercise info Placeholder");
         exerciseDiagramButton = new JButton("View Diagram");
@@ -268,6 +289,7 @@ public class View {
 
         exercisePerformedLabel = new JLabel("exercise performed Placeholder");
         exercisePerformedField = new JTextField(5);
+        exercisePerformedField.setMaximumSize(new Dimension(SIZE_X, 50));
         exercisePerformedField.setToolTipText("Enter positive number");
         exercisePerformedButton = new JButton("Enter");
         exercisePerformedButton.setFocusable(false);
