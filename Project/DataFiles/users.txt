@@ -6,3 +6,5 @@ capitaltest2::123
 beans!::beans!
 testt::test
 a::b
+test2::123
+abcd::12345
