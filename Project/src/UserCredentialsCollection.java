@@ -19,12 +19,16 @@ public class UserCredentialsCollection {
             // put all lines of the file into an array
             String[] lines = TextFileHandler.getFileContents("users").split("\\R");
 
-            // while there are lines in the file, read the line and add the user to the array
-            for(String line : lines) {
-                String name = line.substring(0, line.indexOf("::"));
-                String password = line.substring(line.indexOf("::") + 2);
-                users.add(new UserCredentials(name, password));
+            // check if the file has contents before reading from it
+            if(!lines[0].isEmpty()){
+                // while there are lines in the file, read the line and add the user to the array
+                for(String line : lines) {
+                    String name = line.substring(0, line.indexOf("::"));
+                    String password = line.substring(line.indexOf("::") + 2);
+                    users.add(new UserCredentials(name, password));
+                }
             }
+
         }
     }
 
