@@ -20,7 +20,7 @@ public class UserCredentialsCollection {
             String[] lines = TextFileHandler.getFileContents("users").split("\\R");
 
             // check if the file has contents before reading from it
-            if(!lines[0].isEmpty()){
+            if(lines.length > 0 && !lines[0].isBlank()){
                 // while there are lines in the file, read the line and add the user to the array
                 for(String line : lines) {
                     String name = line.substring(0, line.indexOf("::"));
