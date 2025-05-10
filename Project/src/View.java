@@ -61,9 +61,6 @@ public class View {
 
 
     public View(){
-        // TODO: give the view a proper layout later
-        // loginPanel.setLayout(new GridBagLayout());
-        // mainPanel.setLayout(new GridBagLayout());
         frame = new JFrame("Cal Pal");
 
         // the login view
@@ -309,20 +306,7 @@ public class View {
         dataEntryPane.addTab("Exercise", null, exercisePanel, "Use this tab to search exercise data, " +
                 "to input the amount of exercise performed, and to view exercise diagrams");
 
-        // add components to the main panel
-//        mainPanel.add(userNameDisplayLabel);
-//        mainPanel.add(selectDayLabel);
-//        mainPanel.add(dateDropdown);
-//        mainPanel.add(dateLabel);
-//        mainPanel.add(caloriesConsumedLabel);
-//        mainPanel.add(caloriesBurnedLabel);
-//        mainPanel.add(netCalorieIntakeLabel);
-//        mainPanel.add(setCaloriesConsumedLabel);
-//        mainPanel.add(setCaloriesConsumedField);
-//        mainPanel.add(setCaloriesConsumedButton);
-//        mainPanel.add(setCaloriesBurnedLabel);
-//        mainPanel.add(setCaloriesBurnedField);
-//        mainPanel.add(setCaloriesBurnedButton);
+
         dataEntryPane.setMaximumSize(new Dimension(1000,300));
         mainContentPanel.add(dataEntryPane);
 

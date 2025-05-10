@@ -10,7 +10,7 @@ public class FoodDAO implements FoodDAOInterface{
         try {
 
             //gets file and filepath
-            FileReader filereader = new FileReader(TextFileHandler.getFile("food.csv")); //absolutely SMACKING job ryan, this file handler is a godsend
+            FileReader filereader = new FileReader(TextFileHandler.getFile("food.csv"));
 
 
             //read csv
@@ -29,7 +29,7 @@ public class FoodDAO implements FoodDAOInterface{
                 }
             }
 
-        } catch (Exception o) {System.out.println("Problem with foodDAO getByName"); o.printStackTrace(); System.exit(1); }
+        } catch (Exception o) {System.out.println("Problem with foodDAO getByName"); o.printStackTrace(); System.exit(8); }
         if(!found) return null; // item is not found
 
         return new FoodItem(name, cals, grams); //found
@@ -54,7 +54,7 @@ public class FoodDAO implements FoodDAOInterface{
 
                 foods.add(new FoodItem(name, cals, grams)); // adds food to arraylist
             }
-        } catch (Exception o) { System.out.println("Problem with foodDAO GetAll."); o.printStackTrace(); System.exit(1); }
+        } catch (Exception o) { System.out.println("Problem with foodDAO GetAll."); o.printStackTrace(); System.exit(9); }
 
         return foods;
 

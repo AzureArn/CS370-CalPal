@@ -26,7 +26,7 @@ public class ExerciseDAO implements ExerciseDAOInterface{
             while((row = csvreader.readNext()) != null){
                 if(row[0].equals(name)){ found = true; }
                 if(found){
-                    image = ImageIO.read(TextFileHandler.getFile(row[1])); // still must be converted to a swing object by controller? or view?
+                    image = ImageIO.read(TextFileHandler.getFile(row[1]));
                     cals = Integer.parseInt(row[2]);
                     isCardio = Boolean.parseBoolean(row[3]);
                 }
@@ -34,7 +34,7 @@ public class ExerciseDAO implements ExerciseDAOInterface{
 
             filereader.close();
 
-        } catch(Exception o) { System.out.println("problem in exerciseDAO getbyname"); o.printStackTrace(); System.exit(1); }
+        } catch(Exception o) { System.out.println("problem in exerciseDAO getbyname"); o.printStackTrace(); System.exit(11); }
 
 
 
@@ -57,14 +57,14 @@ public class ExerciseDAO implements ExerciseDAOInterface{
             String[] row;
             while((row = csvreader.readNext()) != null){
                 name = row[0];
-                image = ImageIO.read(TextFileHandler.getFile(row[1])); // still must be converted to a swing object by controller? or view?
+                image = ImageIO.read(TextFileHandler.getFile(row[1]));
                 cals = Integer.parseInt(row[2]);
                 isCardio = Boolean.parseBoolean(row[3]);
 
 
                 exercises.add(new Exercise(name, image, cals, isCardio));
             }
-        } catch(Exception o) { System.out.println("problem in exerciseDAO getall"); o.printStackTrace(); System.exit(1); }
+        } catch(Exception o) { System.out.println("problem in exerciseDAO getall"); o.printStackTrace(); System.exit(12); }
 
 
 

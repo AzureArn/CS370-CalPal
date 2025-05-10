@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class UIController {
     // the loginManager and dataManager interact with the user credential data and calorie data respectively
     UserLoginManager loginManager;
     UserDataManager userDataManager;
+    // databaseManager interacts with the food and exercise databases
     DatabaseDataManager databaseManager;
 
     public UIController(View view){
@@ -145,10 +147,14 @@ public class UIController {
 
         if(success){
             // use the message label to tell the user it was successful
+            // set text to black
+            view.getLoginPageStatusLabel().setForeground(Color.BLACK);
             view.getLoginPageStatusLabel().setText("User " + name + " created");
         }
         else{
             // use the message label to tell the user it was not successful
+            // set text to red before showing user error message
+            view.getLoginPageStatusLabel().setForeground(Color.RED);
             view.getLoginPageStatusLabel().setText("Could not add user," +
                     " name is either taken or name/password includes ':' character");
         }
@@ -191,6 +197,8 @@ public class UIController {
         }
         else{
             // use the message label to tell the user login was not successful
+            // set text color to red before showing error message
+            view.getLoginPageStatusLabel().setForeground(Color.RED);
             view.getLoginPageStatusLabel().setText("Could not log in");
         }
     }
@@ -260,6 +268,7 @@ public class UIController {
     }
 
     // foodDropdown's behavior
+    // updates food information label depending on selected food
     private void selectFood(){
         FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
         if(item == null || item.getName().equals("N/A")){
@@ -271,6 +280,7 @@ public class UIController {
     }
 
     // foodEatenButton's behavior
+    // adds calculated value to calories consumed if valid, shows popup if invalid
     private void addCaloriesConsumed(){
         FoodItem item = (FoodItem) view.getFoodDropdown().getSelectedItem();
         String servings = view.getFoodEatenField().getText();
@@ -299,6 +309,7 @@ public class UIController {
     }
 
     // exerciseDropdown's behavior
+    // updates exercise information label and text entry prompt depending on the selected exercise
     private void selectExercise(){
         Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
         if(exercise.getIsCardio()){
@@ -331,6 +342,7 @@ public class UIController {
     }
 
     // exercisePerformedButton's behavior
+    // adds calculated value to calories burned if valid, shows popup if invalid
     private void addCaloriesBurned(){
         Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
         String exercisePerformed = view.getExercisePerformedField().getText();
@@ -366,6 +378,7 @@ public class UIController {
     }
 
     // exerciseDiagramButton's behavior
+    // brings up another window to show the diagram associated with the selected exercise
     private void showDiagram(){
         // frame to contain image
         Exercise exercise = (Exercise) view.getExerciseDropdown().getSelectedItem();
