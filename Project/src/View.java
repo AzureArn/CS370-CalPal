@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 // view class, creates components to be interacted with by UIController
@@ -20,7 +19,6 @@ public class View {
     private JButton loginButton;
     private JButton createUserButton;
     private JLabel loginPageStatusLabel;
-    private JLabel loginError;
 
     // main view components
     private JLabel userNameDisplayLabel;
