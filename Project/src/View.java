@@ -37,7 +37,6 @@ public class View {
     //  main view's tabbed pane components
     private JTabbedPane dataEntryPane;
 
-    private JPanel foodPanel;
     private JLabel selectFoodLabel;
     private JComboBox foodDropdown;
     private JLabel foodFilterLabel;
@@ -47,8 +46,6 @@ public class View {
     private JTextField foodEatenField;
     private JButton foodEatenButton;
 
-
-    private JPanel exercisePanel;
     private JLabel selectExerciseLabel;
     private JComboBox<Exercise> exerciseDropdown;
     private JLabel exerciseInfoLabel;
@@ -71,7 +68,6 @@ public class View {
         final int SIZE_X = 800; // 1920; // A standard resolution to use
         final int SIZE_Y = 600; // 1080;
         frame.setSize(SIZE_X, SIZE_Y);
-        //frame.setResizable(false); // prevents changing window from changing res size
         frame.setLocationRelativeTo(null); // makes the window centered upon creation, only do after sizing the frame
 
 
