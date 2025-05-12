@@ -1,6 +1,4 @@
 import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 
 public class Exercise {
     private String name;
@@ -25,7 +23,7 @@ public class Exercise {
 
     public boolean getIsCardio() { return isCardio; }
 
-    public String display(){ return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise + Boolean.toString(this.isCardio); } // change image obv.. just for demonstration right now
+    public String display(){ return name + " " + diagramImage.toString() + " " + caloriesPerUnitExercise + Boolean.toString(this.isCardio); }
 
     @Override
     public String toString() { return name; }
