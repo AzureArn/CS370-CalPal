@@ -28,8 +28,26 @@
 - Worked on lab 9
 
 
-... lost some notes..? will find them
+3/25/25 Meeting 6
+- Assisted eachother in study for Midterm II
+- Discussed how to move forward with catching up for Spring Break, and meeting with professor
+
+4/8/25
+- Discussed what we need to work on after getting the basic skeleton of the program (View classes, Model Classes, Controller Classes) with controller being the most developed at this time
+  - Max will work on data access
+  - Adam will begin work on UI
+  - Ryan will continue working on the control layer
+- we also decided that we will be dropping the API as it has proven too difficult to implement for us at this time (as our 4th member has seemingly dropped the course)
+
+4/15/25
+  - Max finished FoodDAO and Exercise DAO, discussed on how we will create internal databases
+    - settled on populating it with data from other sources
+
+4/22/25
+- Max continued work on the databases
+- Adam has created a solid skeleton for the UI moving forward
 
 4/29/25 Meeting 9
 - Discussed changes we had made on respective branches (Adam UI, Max Data Access, Ryan Control)
 - Tightening up screws and bolts before meeting today..
+- Merge party
